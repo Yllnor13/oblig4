@@ -1,5 +1,7 @@
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-class Lenkeliste<T> implements Liste<T> {
+class Lenkeliste<T> implements Liste<T>, Iterable<T> {
   class Node { //lag indre klasse Node
     Node neste = null;
     T data;
@@ -9,7 +11,7 @@ class Lenkeliste<T> implements Liste<T> {
   }//Node
 
   protected Node start = null; //lag en start peker
-
+  
   public int stoerrelse() {
     Node p = start;
     int teller = 0;
@@ -132,4 +134,30 @@ class Lenkeliste<T> implements Liste<T> {
 
 
   }//fjern() 
+
+  //oblig 4 Del C
+  class LenkelisteIterator implements Iterator<T>{ //klasse som implementerer Iterator-grensesnittet.
+
+    Node iNode = start;
+
+    @Override
+    public boolean hasNext() {
+      return (iNode != null); //sjekker om det er noe i lenkeliste
+    }
+
+    @Override
+    public T next() { 
+      if (hasNext()){ //kjoerer dette dersom det er et neste element
+        T t = iNode.data; //t faar verdien til iNode.data
+        iNode = iNode.neste; //iNode blir iNode.neste
+        return t; //return t
+      }
+      throw new NoSuchElementException(); //denne exception kjoerer hvis det ikke har noe neste element
+    }
+  }
+
+  @Override
+  public Iterator<T> iterator() {
+    return new LenkelisteIterator(); //returner ny lenkelisteIterator
+  }
 }
