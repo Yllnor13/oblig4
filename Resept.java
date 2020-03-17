@@ -3,10 +3,10 @@ public abstract class Resept{
     public int Id;
     int reit;
     Lege doc;
-    int pasientID;
+    Pasient pasientID;
     Legemiddel leg;
 
-    public Resept(Legemiddel lm, Lege l, int p, int r){
+    public Resept(Legemiddel lm, Lege l, Pasient p, int r){
         reit = r;
         Id = teller;
         teller++;
@@ -27,7 +27,7 @@ public abstract class Resept{
         return doc.hentNavn();
     }
 
-    public int hentPasientId(){
+    public Pasient hentPasientId(){
         return pasientID;
     }
 

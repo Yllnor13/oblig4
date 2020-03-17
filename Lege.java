@@ -1,7 +1,7 @@
 
 public class Lege implements Comparable<Lege> {
     private Lenkeliste<Resept> utskrevedeResepter; //variablen har type Lenkeliste og Lenkeliste skal inneholde Resepter-objekter
-    private String navn;
+    public String navn;
     public Lege(String n){
         navn = n;
     }
