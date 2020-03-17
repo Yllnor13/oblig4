@@ -1,7 +1,7 @@
 public class MillitaerResept extends HvitResept{
 
-    public MillitaerResept(Legemiddel lm, Lege l, Pasient p, int r){
-        super(lm, l, p, r);
+    public MillitaerResept(Legemiddel lm, Lege l, Pasient pasient, int r){
+        super(lm, l, pasient, r);
     }
 
     public double prisAaBetale(){
