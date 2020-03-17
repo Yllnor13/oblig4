@@ -6,7 +6,7 @@ public abstract class Resept{
     Pasient pasientID;
     Legemiddel leg;
 
-    public Resept(Legemiddel lm, Lege l, Pasient paisent, int r){
+    public Resept(Legemiddel lm, Lege l, Pasient pasient, int r){
         reit = r; 
         Id = teller;
         teller++;
