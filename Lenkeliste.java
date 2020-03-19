@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-class Lenkeliste<T> implements Liste<T>, Iterable<T> {
+public class Lenkeliste<T> implements Liste<T>, Iterable<T> {
   class Node { //lag indre klasse Node
     Node neste = null;
     T data;

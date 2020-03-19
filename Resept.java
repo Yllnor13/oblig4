@@ -6,12 +6,12 @@ public abstract class Resept{
     Pasient pasientID;
     Legemiddel leg;
 
-    public Resept(Legemiddel lm, Lege l, Pasient pasient, int r){
-        reit = r; 
+    public Resept(Legemiddel lm, Lege l, Pasient p, int r){
+        reit = r;
         Id = teller;
         teller++;
         doc = l;
-        pasientID = pasient;
+        pasientID = p;
         leg = lm;
     }
 

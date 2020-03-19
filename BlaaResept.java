@@ -1,8 +1,8 @@
 public class BlaaResept extends Resept{
     double betal = 0.25;
 
-    public BlaaResept(Legemiddel lm, Lege l, Pasient pasient, int r){
-        super(lm, l, pasient, r);
+    public BlaaResept(Legemiddel lm, Lege l, Pasient p, int r){
+        super(lm, l, p, r);
     }
 
     public String hentFarge(){
