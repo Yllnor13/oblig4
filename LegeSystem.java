@@ -26,7 +26,9 @@ public class LegeSystem{
         while(leser.hasNextLine()){
             String[] lestinn = lest.split(" ");
             if(lestinn[1].compareTo("Pasienter") == 0){
-
+                while(leser.hasNextLine()){
+                    lest = leser.nextLine();
+                }
             }
         }
     }
@@ -48,6 +50,7 @@ public class LegeSystem{
 
             if(bruker.equals("1")){
                 System.out.println("du tastet 1");
+                oversikt();
             }
             else if(bruker.equals("2")){
                 System.out.println("du tastet 2");
@@ -66,5 +69,16 @@ public class LegeSystem{
             }
             
         }
+    }
+
+    public static void oversikt(){
+        System.out.println("leger...");
+        leger.skrivUt();
+        System.out.println("resepter...");
+        resepter.skrivUt();
+        System.out.println("pasienter...");
+        pasienter.skrivUt();
+        System.out.println("legemidler...");
+        legemidler.skrivUt();
     }
 }

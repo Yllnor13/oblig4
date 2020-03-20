@@ -45,4 +45,8 @@ public class SortertLenkeliste<T extends Comparable<T>> extends Lenkeliste<T> im
     throw new UnsupportedOperationException("Ikke mulig aa legge til paa posisjon.");
   }
 
+  @Override
+  public void skrivUt(){
+    super.skrivUt();
+  }
 }
