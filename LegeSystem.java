@@ -10,8 +10,40 @@ public class LegeSystem{
 
     public static void main (String[] args){
         File tekst = new File("innlesing.txt");
-        les(tekst);
+        liksomLes();
         meny();
+    }
+
+    public static void liksomLes(){
+        Pasient p1 = new Pasient("Jens Hans Olsen", "11111143521");
+        Pasient p2 = new Pasient("Petrolina Swiq", "24120099343");
+        Pasient p3 = new Pasient("Sven Svendsen", "10111224244");
+        Pasient p4 = new Pasient("Juni Olsen", "21049563451");
+
+        pasienter.leggTil(p1);
+        pasienter.leggTil(p2);
+        pasienter.leggTil(p3);
+        pasienter.leggTil(p4);
+
+        Narkotisk lm1 = new Narkotisk("predizol", 450.00, 75.00, 8);
+        Vanedannede lm2 = new Vanedannede("Paralgin Forte", 65.00, 400.00, 5);
+        Vanlig lm3 = new Vanlig("Placebo Pianissimo", 10.00, 0.00);
+        Vanlig lm4 = new Vanlig("Ibux", 240.00, 200.00);
+
+        legemidler.leggTil(lm1);
+        legemidler.leggTil(lm2);
+        legemidler.leggTil(lm3);
+        legemidler.leggTil(lm4);
+
+        Lege l1 = new Lege("Dr. Cox");
+        Lege l2 = new Lege("Dr. Wilson");
+        Lege l3 = new Spesialist("Dr. House", 12345);
+        Lege l4 = new Lege("Dr. Hillestad Lovold");
+
+        leger.leggTil(l1);
+        leger.leggTil(l2);
+        leger.leggTil(l3);
+        leger.leggTil(l4);
     }
 
     public static void les(File fil){
@@ -162,21 +194,38 @@ public class LegeSystem{
             if(bruker.equals("1")){
                 System.out.println("du tastet 1");
                 oversikt();
+                System.out.println("trykk enter for aa draa videre");
+                bruker=brukerInput.nextLine();
             }
             else if(bruker.equals("2")){
                 System.out.println("du tastet 2");
+                lagNy();
+                System.out.println("trykk enter for aa draa videre");
+                bruker=brukerInput.nextLine();
             }
             else if(bruker.equals("3")){
                 System.out.println("du tastet 3");
+
+                System.out.println("trykk enter for aa draa videre");
+                bruker=brukerInput.nextLine();
             }
             else if(bruker.equals("4")){
                 System.out.println("du tastet 4");
+
+                System.out.println("trykk enter for aa draa videre");
+                bruker=brukerInput.nextLine();
             }
             else if(bruker.equals("5")){
                 System.out.println("du tastet 5");
+
+                System.out.println("trykk enter for aa draa videre");
+                bruker=brukerInput.nextLine();
             }
             else if(!bruker.equals("q")){
                 System.out.println("det du skrev ble ikke gjenkjent");
+
+                System.out.println("trykk enter for aa draa videre");
+                bruker=brukerInput.nextLine();
             }
             
         }
@@ -191,5 +240,46 @@ public class LegeSystem{
         pasienter.skrivUt();
         System.out.println("legemidler...");
         legemidler.skrivUt();
+    }
+
+    public static void lagNy(){
+        System.out.println("Hva vil du gjoere? \n 1. ny lege? \n 2. ny pasient? \n 3. ny legemiddel?\n 4. ny resept?\n q. dra tilbake?");
+        String bruker = " ";
+        while(!bruker.equals("q")){
+            Scanner brukerInput = new Scanner(System.in);
+            bruker = brukerInput.nextLine();
+
+            if(bruker.equals("1")){
+                System.out.println("Du valgte å lage ny lege\nskriv legens navn");
+                String svar1 = " ";
+                String svar2 = " ";
+                svar1 = brukerInput.nextLine();
+                System.out.println("legg til kontrollId (0 om det ikke er en)");
+                svar2 = brukerInput.nextLine();
+                int kontroll = Integer.parseInt(svar2);
+                if(kontroll >= 0){
+                    if(kontroll == 0){
+                        Lege lege = new Lege(svar1);
+                        leger.leggTil(lege);
+                    }
+                else{
+                        Spesialist spesialist = new Spesialist(svar1, kontroll);
+                        leger.leggTil(spesialist);
+                    }
+                }
+            }
+            else if(bruker.equals("2")){
+
+            }
+            else if(bruker.equals("3")){
+            
+            }
+            else if(bruker.equals("4")){
+
+            }
+            else if(!bruker.equals("q")){
+                System.out.println("det du skrev ble ikke gjenkjent");
+            }
+        }
     }
 }
