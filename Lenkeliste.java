@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-class Lenkeliste<T> implements Liste<T>, Iterable<T> {
+public class Lenkeliste<T> implements Liste<T>, Iterable<T> {
   class Node { //lag indre klasse Node
     Node neste = null;
     T data;
@@ -160,6 +160,7 @@ class Lenkeliste<T> implements Liste<T>, Iterable<T> {
   public Iterator<T> iterator() {
     return new LenkelisteIterator(); //returner ny lenkelisteIterator
   }
+
   public void skrivUt(){ //skal skrive ut alt i lista
     if(start == null){ //om det ikke er noe i lista
         System.out.println("lista er tomt"); //så er den tom

@@ -10,8 +10,15 @@ public class LegeSystem{
 
     public static void main (String[] args){
         File tekst = new File("innlesing.txt");
-        liksomLes();
+        les(tekst);
+        sjekkId();
         meny();
+    }
+
+    public static void sjekkId(){
+        for(Legemiddel i : legemidler){
+            System.out.println(i.hentId());
+        }
     }
 
     public static void liksomLes(){
@@ -44,6 +51,35 @@ public class LegeSystem{
         leger.leggTil(l2);
         leger.leggTil(l3);
         leger.leggTil(l4);
+
+        try{
+            Resept r1 =l1.skrivHvitResept(lm2, p2, 7);
+            resepter.leggTil(r1);
+        }
+        catch(UlovligUtskrift e){
+            System.out.println("skriv riktig");
+        }
+        try{
+            Resept r2 = l4.skrivBlaaResept(lm3, p3, 1000);
+            resepter.leggTil(r2);
+        }
+        catch(UlovligUtskrift e){
+            System.out.println("skriv riktig");
+        }
+        try{
+            Resept r3 = l3.skrivMilitaerResept(lm1, p1, 12);
+            resepter.leggTil(r3);
+        }
+        catch(UlovligUtskrift e){
+            System.out.println("skriv riktig");
+        }
+        try{
+            Resept r4 = l2.skrivPResept(lm4, p3);
+            resepter.leggTil(r4);
+        }
+        catch(UlovligUtskrift e){
+            System.out.println("skriv riktig");
+        }
     }
 
     public static void les(File fil){
@@ -58,7 +94,7 @@ public class LegeSystem{
         String lest = leser.nextLine();
         while(leser.hasNextLine()){
             String [] tittel = lest.split(" ");
-            if(tittel[1] == "Pasienter"){
+            if(tittel[1].equals("Pasienter")){
                 while(leser.hasNextLine()){
                     lest = leser.nextLine();
                     if(lest.charAt(0) == '#'){
@@ -69,28 +105,28 @@ public class LegeSystem{
                     pasienter.leggTil(pasient);
                 }
             }
-            else if(tittel[1] == "Legemidler"){
+            else if(tittel[1].equals("Legemidler")){
                 while(leser.hasNextLine()){
                     lest = leser.nextLine();
                     if(lest.charAt(0) == '#'){
                         break;
                     }
                     String[] info = lest.split(",");
-                    if(info[1] == "narkotisk"){
+                    if(info[1].equals("narkotisk")){
                         int styrke = Integer.parseInt(info[4]);
                         Double pris = Double.parseDouble(info[2]);
                         Double virkestoff = Double.parseDouble(info[3]);
                         Narkotisk narkotisk = new Narkotisk(info[0], pris, virkestoff, styrke);
                         legemidler.leggTil(narkotisk);
                     }
-                    if(info[1] == "vanedannede"){
+                    if(info[1].equals("vanedannende")){
                         int styrke = Integer.parseInt(info[4]);
                         Double pris = Double.parseDouble(info[2]);
                         Double virkestoff = Double.parseDouble(info[3]);
                         Vanedannede vanedannede = new Vanedannede(info[0], pris, virkestoff, styrke);
                         legemidler.leggTil(vanedannede);
                     }
-                    if(info[1] == "vanlig"){
+                    if(info[1].equals("vanlig")){
                         Double pris = Double.parseDouble(info[2]);
                         Double virkestoff = Double.parseDouble(info[3]);
                         Vanlig vanlig = new Vanlig(info[0], pris, virkestoff);
@@ -98,7 +134,7 @@ public class LegeSystem{
                     }
                 }
             }
-            else if(tittel[1] == "Leger"){
+            else if(tittel[1].equals("Leger")){
                 while(leser.hasNextLine()){
                     lest = leser.nextLine();
                     if(lest.charAt(0) == '#'){
@@ -116,7 +152,7 @@ public class LegeSystem{
                     }
                 }
             }
-            else if(tittel[1] == "Resepter"){
+            else if(tittel[1].equals("Resepter")){
                 while(leser.hasNextLine()){
                     lest = leser.nextLine();
                     String[] info = lest.split(",");
@@ -127,12 +163,12 @@ public class LegeSystem{
                     int pasId = Integer.parseInt(info[2]);
                     
                     for(Legemiddel i : legemidler){
-                        if(i.hentId() == middelId){
+                        if(i.hentId()-1 == middelId){
                             nymid = i;
                         }
                     }
                     for(Lege i : leger){
-                        if(i.hentNavn() == info[1]){
+                        if(i.hentNavn().equals(info[1])){
                             nyleg = i;
                         }
                     }
@@ -141,30 +177,44 @@ public class LegeSystem{
                             nypas = i;
                         }
                     }
-                    if(info[3] == "hvit"){
+                    if(info[3].equals("hvit")){
                         int reit = Integer.parseInt(info[4]);
                         try{
                             Resept resept = nyleg.skrivHvitResept(nymid, nypas, reit);
                             resepter.leggTil(resept);
+                            nypas.leggTilResept(resept);
                         }
                         catch(UlovligUtskrift e){
                             System.out.println(e);
                         }
                     }
-                    else if(info[3] == "blaa"){
+                    else if(info[3].equals("blaa")){
                         int reit = Integer.parseInt(info[4]);
                         try{
                             Resept resept = nyleg.skrivBlaaResept(nymid, nypas, reit);
                             resepter.leggTil(resept);
+                            nypas.leggTilResept(resept);
                         }
                         catch(UlovligUtskrift e){
                             System.out.println(e);
                         }
                     }
-                    else if(info[3] == "p"){
+                    else if(info[3].equals("millitaer")){
+                        int reit = Integer.parseInt(info[4]);
+                        try{
+                            Resept resept = nyleg.skrivMilitaerResept(nymid, nypas, reit);
+                            resepter.leggTil(resept);
+                            nypas.leggTilResept(resept);
+                        }
+                        catch(UlovligUtskrift e){
+                            System.out.println(e);
+                        }
+                    }
+                    else if(info[3].equals("p")){
                         try{
                             Resept resept = nyleg.skrivPResept(nymid, nypas);
                             resepter.leggTil(resept);
+                            nypas.leggTilResept(resept);
                         }
                         catch(UlovligUtskrift e){
                             System.out.println(e);
@@ -234,12 +284,12 @@ public class LegeSystem{
     public static void oversikt(){
         System.out.println("leger...");
         leger.skrivUt();
-        System.out.println("resepter...");
-        resepter.skrivUt();
         System.out.println("pasienter...");
         pasienter.skrivUt();
         System.out.println("legemidler...");
         legemidler.skrivUt();
+        System.out.println("resepter...");
+        resepter.skrivUt();
     }
 
     public static void lagNy(){
@@ -285,6 +335,7 @@ public class LegeSystem{
                 leger.skrivUt();
                 String svar1 = " ";
                 svar1 = brukerInput.nextLine();
+
             }
             else if(bruker.equals("4")){
                 System.out.println("du vil lage legemiddel");
