@@ -243,7 +243,7 @@ public class LegeSystem{
     }
 
     public static void lagNy(){
-        System.out.println("Hva vil du gjoere? \n 1. ny lege? \n 2. ny pasient? \n 3. ny legemiddel?\n 4. ny resept?\n q. dra tilbake?");
+        System.out.println("Hva vil du gjoere? \n 1. ny lege? \n 2. ny pasient? \n 3. ny resept?\n 4. ny legemiddel?\n q. dra tilbake?");
         String bruker = " ";
         while(!bruker.equals("q")){
             Scanner brukerInput = new Scanner(System.in);
@@ -269,13 +269,25 @@ public class LegeSystem{
                 }
             }
             else if(bruker.equals("2")){
-
+                System.out.println("du vil lage pasient");
+                String svar1 = " ";
+                String svar2 = " ";
+                System.out.println("Skriv navnet til pasienten");
+                svar1 = brukerInput.nextLine();
+                System.out.println("skriv inn foedselsnummeret");
+                svar2 = brukerInput.nextLine();
+                Pasient pasient = new Pasient(svar1, svar2);
+                pasienter.leggTil(pasient);
             }
             else if(bruker.equals("3")){
-            
+                System.out.println("du vil lage resept");
+                System.out.println("velg hvilken lege som skal skrive resept");
+                leger.skrivUt();
+                String svar1 = " ";
+                svar1 = brukerInput.nextLine();
             }
             else if(bruker.equals("4")){
-
+                System.out.println("du vil lage legemiddel");
             }
             else if(!bruker.equals("q")){
                 System.out.println("det du skrev ble ikke gjenkjent");

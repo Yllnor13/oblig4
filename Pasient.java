@@ -1,4 +1,4 @@
-class Pasient{ //Del B: Skriv klassen Pasient
+public class Pasient{ //Del B: Skriv klassen Pasient
 
    //Deklarerer instansvariabler
   private String navn; //Pasienten har et navn og et fødselsnummer-tekststreng
