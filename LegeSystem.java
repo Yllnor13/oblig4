@@ -11,7 +11,6 @@ public class LegeSystem{
     public static void main (String[] args){
         File tekst = new File("innlesing.txt");
         les(tekst);
-        sjekkId();
         meny();
     }
 
@@ -163,7 +162,7 @@ public class LegeSystem{
                     int pasId = Integer.parseInt(info[2]);
                     
                     for(Legemiddel i : legemidler){
-                        if(i.hentId()-1 == middelId){
+                        if(i.hentId() == middelId){
                             nymid = i;
                         }
                     }
@@ -334,7 +333,46 @@ public class LegeSystem{
                 System.out.println("velg hvilken lege som skal skrive resept");
                 leger.skrivUt();
                 String svar1 = " ";
+                System.out.println("skriv navnet til legen");
                 svar1 = brukerInput.nextLine();
+                Pasient nypas = null;
+                Lege nyleg = null;
+                Legemiddel nymid = null;
+                Resept nyrep = null;
+                for(Lege i : leger){
+                    if(i.hentNavn().equals(svar1)){
+                        nyleg = i;
+                        System.out.println("du valgte en lege");
+                        String svar2 = " ";
+                        System.out.println("velg hvilken pasient som skal faa resept");
+                        pasienter.skrivUt();
+                        System.out.println("skriv inn pasient Id'en");
+                        svar2 = brukerInput.nextLine();
+                        for(Pasient j : pasienter){
+                            int svarid = Integer.parseInt(svar2);
+                            nypas = j;
+                            if(j.hentId() == svarid){
+                                System.out.println("fant pasient");
+                                System.out.println("velg hva slags resept du vil lage");
+                                System.out.println("skriv det foerste tallet om du vil lage...\n 1. Hvit resept \n 2. Blaa resept \n 3. Militaerresept \n 4. P-resept");
+                                String svar3 = " ";
+                                svar3 = brukerInput.nextLine();
+                                if(svar3.equals("1")){
+                                    System.out.println("skriv senere");
+                                }
+                                else if(svar3.equals("2")){
+                                    System.out.println("skriv senere");
+                                }
+                                else if(svar3.equals("3")){
+                                    System.out.println("skriv senere");
+                                }
+                                else if(svar3.equals("4")){
+                                    System.out.println("skriv senere");
+                                }
+                            }
+                        }
+                    }
+                }
 
             }
             else if(bruker.equals("4")){
