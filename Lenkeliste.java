@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Lenkeliste<T> implements Liste<T>, Iterable<T> {
+class Lenkeliste<T> implements Liste<T>, Iterable<T> {
   class Node { //lag indre klasse Node
     Node neste = null;
     T data;
@@ -136,44 +136,28 @@ public class Lenkeliste<T> implements Liste<T>, Iterable<T> {
   }//fjern() 
 
   //oblig 4 Del C
-  private class LenkelisteIterator implements Iterator<T> {
-    private int i = 0;
-    private Lenkeliste<T> liste;
+  class LenkelisteIterator implements Iterator<T>{ //klasse som implementerer Iterator-grensesnittet.
 
-    public LenkelisteIterator(Lenkeliste<T> liste){
-      this.liste = liste;
+    Node iNode = start;
+
+    @Override
+    public boolean hasNext() {
+      return (iNode != null); //sjekker om det er noe i lenkeliste
     }
 
     @Override
-    public boolean hasNext(){ // return true om element har neste (om index er mindre err stoerrelse av liste)
-      return i < liste.stoerrelse();
-    }
-
-    @Override
-    public T next(){ // returnerer neste om det finnes neste i lenkedliste
-      if(hasNext()){
-        return liste.hent(i++);
+    public T next() { 
+      if (hasNext()){ //kjoerer dette dersom det er et neste element
+        T t = iNode.data; //t faar verdien til iNode.data
+        iNode = iNode.neste; //iNode blir iNode.neste
+        return t; //return t
       }
-      throw new NoSuchElementException();
-    }
-
-    // metode brukes ikke i program
-    @Override
-    public void remove(){
-      throw new UnsupportedOperationException();
+      throw new NoSuchElementException(); //denne exception kjoerer hvis det ikke har noe neste element
     }
   }
 
-  public void skrivUt(){ //skal skrive ut alt i lista
-    if(start == null){ //om det ikke er noe i lista
-        System.out.println("lista er tomt"); //så er den tom
-    }
-    else{ //ellers
-        Node hjelpepeker = start; //så er hjelpepeker på start
-        for(int i = 0; i < stoerrelse(); i++){//går gjennom lista
-            System.out.println(hjelpepeker.data); //printer ut dataen
-            hjelpepeker = hjelpepeker.neste; //går til neste i lista
-        }
-    }
-}
+  @Override
+  public Iterator<T> iterator() {
+    return new LenkelisteIterator(); //returner ny lenkelisteIterator
+  }
 }
