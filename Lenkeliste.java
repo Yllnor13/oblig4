@@ -136,29 +136,32 @@ public class Lenkeliste<T> implements Liste<T>, Iterable<T> {
   }//fjern() 
 
   //oblig 4 Del C
-  class LenkelisteIterator implements Iterator<T>{ //klasse som implementerer Iterator-grensesnittet.
+  private class LenkelisteIterator implements Iterator<T> {
+    private int i = 0;
+    private Lenkeliste<T> liste;
 
-    Node iNode = start;
-
-    @Override
-    public boolean hasNext() {
-      return (iNode != null); //sjekker om det er noe i lenkeliste
+    public LenkelisteIterator(Lenkeliste<T> liste){
+      this.liste = liste;
     }
 
     @Override
-    public T next() { 
-      if (hasNext()){ //kjoerer dette dersom det er et neste element
-        T t = iNode.data; //t faar verdien til iNode.data
-        iNode = iNode.neste; //iNode blir iNode.neste
-        return t; //return t
+    public boolean hasNext(){ // return true om element har neste (om index er mindre err stoerrelse av liste)
+      return i < liste.stoerrelse();
+    }
+
+    @Override
+    public T next(){ // returnerer neste om det finnes neste i lenkedliste
+      if(hasNext()){
+        return liste.hent(i++);
       }
-      throw new NoSuchElementException(); //denne exception kjoerer hvis det ikke har noe neste element
+      throw new NoSuchElementException();
     }
-  }
 
-  @Override
-  public Iterator<T> iterator() {
-    return new LenkelisteIterator(); //returner ny lenkelisteIterator
+    // metode brukes ikke i program
+    @Override
+    public void remove(){
+      throw new UnsupportedOperationException();
+    }
   }
 
   public void skrivUt(){ //skal skrive ut alt i lista
