@@ -160,4 +160,16 @@ class Lenkeliste<T> implements Liste<T>, Iterable<T> {
   public Iterator<T> iterator() {
     return new LenkelisteIterator(); //returner ny lenkelisteIterator
   }
+  public void skrivUt(){ //skal skrive ut alt i lista
+    if(start == null){ //om det ikke er noe i lista
+        System.out.println("lista er tomt"); //så er den tom
+    }
+    else{ //ellers
+        Node hjelpepeker = start; //så er hjelpepeker på start
+        for(int i = 0; i < stoerrelse(); i++){//går gjennom lista
+            System.out.println(hjelpepeker.data); //printer ut dataen
+            hjelpepeker = hjelpepeker.neste; //går til neste i lista
+        }
+    }
+  }
 }
