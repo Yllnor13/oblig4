@@ -350,8 +350,8 @@ public class LegeSystem{
                         svar2 = brukerInput.nextLine();
                         for(Pasient j : pasienter){
                             int svarid = Integer.parseInt(svar2);
-                            nypas = j;
                             if(j.hentId() == svarid){
+                                nypas = j;
                                 System.out.println("fant pasient");
                                 System.out.println("velg hva slags resept du vil lage");
                                 System.out.println("skriv det foerste tallet om du vil lage...\n 1. Hvit resept \n 2. Blaa resept \n 3. Militaerresept \n 4. P-resept");
