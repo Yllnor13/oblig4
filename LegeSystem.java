@@ -358,7 +358,7 @@ public class LegeSystem{
                                 String svar3 = " ";
                                 svar3 = brukerInput.nextLine();
                                 if(svar3.equals("1")){
-                                    System.out.println("skriv senere");
+                                    System.out.println("Du valgte aa lage hvit resept");
                                 }
                                 else if(svar3.equals("2")){
                                     System.out.println("skriv senere");
