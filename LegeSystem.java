@@ -376,9 +376,11 @@ public class LegeSystem{
                                             try{
                                                 nyrep = nyleg.skrivHvitResept(nymid, nypas, reiter);
                                                 resepter.leggTil(nyrep);
+                                                System.out.println("Du har nå laget en ny resept");
+                                                System.out.println("tast inn q, trykk enter, så trykker du enter igjen for å gå til hovedmenyen");
                                             }
                                             catch(UlovligUtskrift e){
-                                                System.out.println("det du skrev funekt ikke");
+                                                System.out.println("det du skrev funket ikke");
                                             }
                                         }
                                     }
@@ -387,19 +389,82 @@ public class LegeSystem{
                                     System.out.println("Du valgte aa lage Blaa resept");
                                     System.out.println("velg hvilken legemiddel du vil lage resept med");
                                     legemidler.skrivUt();
+                                    String svar4 = " ";
+                                    System.out.println("skriv inn id'en til legemiddelet du vil bruke");
+                                    svar4 = brukerInput.nextLine();
+                                    int svarlegeid = Integer.parseInt(svar4);
+                                    for(Legemiddel k : legemidler){
+                                        if(k.hentId() == svarlegeid){
+                                            System.out.println("fant legemiddel");
+                                            nymid = k;
+                                            String svar5 = " ";
+                                            System.out.println("skriv hvor mange reiter du vil ha");
+                                            svar5 = brukerInput.nextLine();
+                                            int reiter = Integer.parseInt(svar5);
+                                            try{
+                                                nyrep = nyleg.skrivBlaaResept(nymid, nypas, reiter);
+                                                resepter.leggTil(nyrep);
+                                                System.out.println("Du har nå laget en ny resept");
+                                                System.out.println("tast inn q, trykk enter, så trykker du enter igjen for å gå til hovedmenyen");
+                                            }
+                                            catch(UlovligUtskrift e){
+                                                System.out.println("det du skrev funket ikke");
+                                            }
+                                        }
+                                    }
                                     
                                 }
                                 else if(svar3.equals("3")){
                                     System.out.println("Du valgte aa lage Militaer resept");
                                     System.out.println("velg hvilken legemiddel du vil lage resept med");
                                     legemidler.skrivUt();
-                                    
+                                    String svar4 = " ";
+                                    System.out.println("skriv inn id'en til legemiddelet du vil bruke");
+                                    svar4 = brukerInput.nextLine();
+                                    int svarlegeid = Integer.parseInt(svar4);
+                                    for(Legemiddel k : legemidler){
+                                        if(k.hentId() == svarlegeid){
+                                            System.out.println("fant legemiddel");
+                                            nymid = k;
+                                            String svar5 = " ";
+                                            System.out.println("skriv hvor mange reiter du vil ha");
+                                            svar5 = brukerInput.nextLine();
+                                            int reiter = Integer.parseInt(svar5);
+                                            try{
+                                                nyrep = nyleg.skrivHvitResept(nymid, nypas, reiter);
+                                                resepter.leggTil(nyrep);
+                                                System.out.println("Du har nå laget en ny resept");
+                                                System.out.println("tast inn q, trykk enter, så trykker du enter igjen for å gå til hovedmenyen");
+                                            }
+                                            catch(UlovligUtskrift e){
+                                                System.out.println("det du skrev funket ikke");
+                                            }
+                                        }
+                                    }
                                 }
                                 else if(svar3.equals("4")){
                                     System.out.println("Du valgte aa lage P resept");
                                     System.out.println("velg hvilken legemiddel du vil lage resept med");
                                     legemidler.skrivUt();
-                                    
+                                    String svar4 = " ";
+                                    System.out.println("skriv inn id'en til legemiddelet du vil bruke");
+                                    svar4 = brukerInput.nextLine();
+                                    int svarlegeid = Integer.parseInt(svar4);
+                                    for(Legemiddel k : legemidler){
+                                        if(k.hentId() == svarlegeid){
+                                            System.out.println("fant legemiddel");
+                                            nymid = k;
+                                            try{
+                                                nyrep = nyleg.skrivPResept(nymid, nypas);
+                                                resepter.leggTil(nyrep);
+                                                System.out.println("Du har nå laget en ny resept");
+                                                System.out.println("tast inn q, trykk enter, så trykker du enter igjen for å gå til hovedmenyen");
+                                            }
+                                            catch(UlovligUtskrift e){
+                                                System.out.println("det du skrev funket ikke");
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
