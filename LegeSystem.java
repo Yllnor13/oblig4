@@ -355,16 +355,16 @@ public class LegeSystem{
                         System.out.println("velg hvilken pasient som skal faa resept");
                         pasienter.skrivUt();
                         System.out.println("skriv inn pasient Id'en");
-                        svar2 = brukerInput.nextLine();
-                        for(Pasient j : pasienter){
-                            int svarid = Integer.parseInt(svar2);
-                            if(j.hentId() == svarid){
-                                nypas = j;
+                        svar2 = brukerInput.nextLine(); //iden som brukeren skriver skal bli lagret som svar2
+                        int svarid = Integer.parseInt(svar2); //gjoer det brukerenskrev om til int
+                        for(Pasient j : pasienter){ //gar gjennom lista med pasienter
+                            if(j.hentId() == svarid){ //finner pasienten med iden skrevet over
+                                nypas = j; //gjoer nypas om til pasienten som er funnet
                                 System.out.println("fant pasient");
                                 System.out.println("velg hva slags resept du vil lage");
                                 System.out.println("skriv det foerste tallet om du vil lage...\n 1. Hvit resept \n 2. Blaa resept \n 3. Militaerresept \n 4. P-resept");
                                 String svar3 = " ";
-                                svar3 = brukerInput.nextLine();
+                                svar3 = brukerInput.nextLine();//bruker velge hva slags resept de vil lage med aa taste nummeret relatert i teksten
                                 if(svar3.equals("1")){
                                     System.out.println("Du valgte aa lage Hvit resept");
                                     System.out.println("velg hvilken legemiddel du vil lage resept med");
