@@ -34,6 +34,6 @@ public class Legemiddel{
     }
 
     public String toString(){
-        return("pris: " + pris + ", virkestoff: " + virkestoff + ", navn: " + navn + ", ID: " + Id);
+        return("ID: " + Id + ", navn: " + navn + ", pris: " + pris + ", virkestoff: " + virkestoff);
     }
 }

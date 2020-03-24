@@ -13,6 +13,6 @@ public class HvitResept extends Resept{
     }
 
     public String toString(){
-        return("type: Hvit Resept" + "\nlegemiddel: " + leg.hentNavn() + " lege: " + doc.hentNavn() + " pris: " + pasientID + " reit: " + reit + " pris: " + prosAaBetale());
+        return("\ntype: Hvit Resept" + "\nlegemiddel: " + leg.hentNavn() + " lege: " + doc.hentNavn() + " pris: " + pasientID + " reit: " + reit + " pris: " + prosAaBetale());
     }
 }

@@ -14,6 +14,6 @@ public class PResept extends HvitResept{
     }
 
     public String toString(){
-        return("type: P Resept" + "\nlegemiddel: " + leg.hentNavn() + " lege: " + doc.hentNavn() + " pasientID: " + pasientID + " reit: " + reit + " pris: " + prisAaBetale());
+        return("\ntype: P Resept" + "\nlegemiddel: " + leg.hentNavn() + " lege: " + doc.hentNavn() + " pasientID: " + pasientID + " reit: " + reit + " pris: " + prisAaBetale());
     }
 }

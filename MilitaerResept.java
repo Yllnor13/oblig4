@@ -9,6 +9,6 @@ public class MilitaerResept extends HvitResept{
     }
 
     public String toString(){
-        return("type: Militaer Resept" + "\nlegemiddel: " + leg.hentNavn() + " lege: " + doc.hentNavn() + " pasientID: " + pasientID + " reit: " + reit + " pris: " + prisAaBetale() + " betal: " + (leg.hentPris() * 0));
+        return("\ntype: Militaer Resept" + "\nlegemiddel: " + leg.hentNavn() + " lege: " + doc.hentNavn() + " pasientID: " + pasientID + " reit: " + reit + " pris: " + prisAaBetale() + " betal: " + (leg.hentPris() * 0));
     }
 }
