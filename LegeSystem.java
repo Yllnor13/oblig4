@@ -365,25 +365,26 @@ public class LegeSystem{
                                 System.out.println("skriv det foerste tallet om du vil lage...\n 1. Hvit resept \n 2. Blaa resept \n 3. Militaerresept \n 4. P-resept");
                                 String svar3 = " ";
                                 svar3 = brukerInput.nextLine();//bruker velge hva slags resept de vil lage med aa taste nummeret relatert i teksten
-                                if(svar3.equals("1")){
-                                    System.out.println("Du valgte aa lage Hvit resept");
+                                if(svar3.equals("1")){ //sjekker hva brukeren tastet
+                                    System.out.println("Du valgte aa lage Hvit resept"); //siden de valgte hvit resept, saa skal det bli lagd hvit resept
                                     System.out.println("velg hvilken legemiddel du vil lage resept med");
                                     legemidler.skrivUt();
                                     String svar4 = " ";
                                     System.out.println("skriv inn id'en til legemiddelet du vil bruke");
-                                    svar4 = brukerInput.nextLine();
-                                    int svarlegeid = Integer.parseInt(svar4);
-                                    for(Legemiddel k : legemidler){
-                                        if(k.hentId() == svarlegeid){
+                                    svar4 = brukerInput.nextLine(); //brukeren skal skrive inn legemiddelet sin id
+                                    int svarlegeid = Integer.parseInt(svar4); //det blir lagret som et tall
+                                    for(Legemiddel k : legemidler){ //gaar gjennom lista for legemidelr
+                                        if(k.hentId() == svarlegeid){ //om den finner legemiddelet med iden som ble skrevet
                                             System.out.println("fant legemiddel");
-                                            nymid = k;
+                                            nymid = k; //gjoer nymid om til legemiddelet som ble funnet
                                             String svar5 = " ";
                                             System.out.println("skriv hvor mange reiter du vil ha");
-                                            svar5 = brukerInput.nextLine();
-                                            int reiter = Integer.parseInt(svar5);
+                                            svar5 = brukerInput.nextLine(); //skriver inn hvor mange reiter som skal vaere der
+                                            int reiter = Integer.parseInt(svar5); //blir lagret som et tall
                                             try{
-                                                nyrep = nyleg.skrivHvitResept(nymid, nypas, reiter);
-                                                resepter.leggTil(nyrep);
+                                                nyrep = nyleg.skrivHvitResept(nymid, nypas, reiter); //lager resepten
+                                                resepter.leggTil(nyrep); //legger den til resepter lista i legeliste
+                                                nypas.leggTilResept(nyrep); //legger den til i reseptlista til pasienten
                                                 System.out.println("Du har naa laget en ny resept");
                                                 System.out.println("tast inn q, trykk enter, saa trykker du enter igjen for aa gaa til hovedmenyen");
                                             }
@@ -393,7 +394,7 @@ public class LegeSystem{
                                         }
                                     }
                                 }
-                                else if(svar3.equals("2")){
+                                else if(svar3.equals("2")){ //gjoer det samme som hvit resept
                                     System.out.println("Du valgte aa lage Blaa resept");
                                     System.out.println("velg hvilken legemiddel du vil lage resept med");
                                     legemidler.skrivUt();
@@ -420,10 +421,13 @@ public class LegeSystem{
                                                 System.out.println("det du skrev funket ikke");
                                             }
                                         }
+                                        else{
+                                            System.out.println("det var ingen legemiddel med den iden");
+                                        }
                                     }
                                     
                                 }
-                                else if(svar3.equals("3")){
+                                else if(svar3.equals("3")){ //gjoer det samme som hvit resept
                                     System.out.println("Du valgte aa lage Militaer resept");
                                     System.out.println("velg hvilken legemiddel du vil lage resept med");
                                     legemidler.skrivUt();
@@ -450,9 +454,12 @@ public class LegeSystem{
                                                 System.out.println("det du skrev funket ikke");
                                             }
                                         }
+                                        else{
+                                            System.out.println("det var ingen legemiddel med den iden");
+                                        }
                                     }
                                 }
-                                else if(svar3.equals("4")){
+                                else if(svar3.equals("4")){ //gjoer det samme som hvit resept men uten reiter
                                     System.out.println("Du valgte aa lage P resept");
                                     System.out.println("velg hvilken legemiddel du vil lage resept med");
                                     legemidler.skrivUt();
@@ -475,8 +482,17 @@ public class LegeSystem{
                                                 System.out.println("det du skrev funket ikke");
                                             }
                                         }
+                                        else{
+                                            System.out.println("det var ingen legemiddel med den iden");
+                                        }
                                     }
                                 }
+                                else{
+                                    System.out.println("du skrev noe annet enn tillatt");
+                                }
+                            }
+                            else{
+                                System.out.println("det du skrev er ikke gjenkjent");
                             }
                         }
                     }
@@ -484,30 +500,30 @@ public class LegeSystem{
 
             }
             else if(bruker.equals("4")){
-                System.out.println("du vil lage legemiddel");
-                String navn = " ";
+                System.out.println("du vil lage legemiddel"); //brukeren skal lage legemiddel
+                String navn = " "; //haugh med objekter som skal bli brukt senere
                 double pris = 0;
                 double virkestoff = 0;
                 int hvaslagsleg = 0;
                 System.out.println("skriv navnet til legemiddelet");
-                navn = brukerInput.nextLine();
+                navn = brukerInput.nextLine(); //det brukeren skrev skal bli brukt som navn
                 System.out.println("skriv prisen til legemiddelet (i tall)");
-                pris = brukerInput.nextInt();
+                pris = brukerInput.nextInt(); //det brukeren skriver som skal bli brukt som prisen
                 System.out.println("skriv styrken til legemiddelet (i double)");
-                virkestoff = brukerInput.nextDouble();
-                Legemiddel nyleg = null;
+                virkestoff = brukerInput.nextDouble(); //det brukeren skriver som skal bli brukt som virkestoff
+                Legemiddel nyleg = null; //tomt legemiddel
                 System.out.println("velg hva slags legemiddel du skal ha \n 1. narkotisk \n 2. vanedannede \n 3. vanlig");
-                hvaslagsleg = brukerInput.nextInt();
-                if(hvaslagsleg == 1){
+                hvaslagsleg = brukerInput.nextInt(); //systemet venter paa det brukeren skriver
+                if(hvaslagsleg == 1){ //brukeren vil lage narkotisk legemiddel
                     int styrke = 0;
                     System.out.println("du valgte aa lage en narkotisk legemiddel \n skriv styrken");
-                    styrke = brukerInput.nextInt();
-                    nyleg = new Narkotisk(navn, pris, virkestoff, styrke);
-                    legemidler.leggTil(nyleg);
+                    styrke = brukerInput.nextInt(); //det bruker skriver som styrke blir lagret her
+                    nyleg = new Narkotisk(navn, pris, virkestoff, styrke); //ny narkotisk legemiddel lagd med variablene som ble deklarert tidligere
+                    legemidler.leggTil(nyleg); //legemiddelet blir lagt til i lista
                     System.out.println("Du har naa laget et nytt legemiddel");
-                    System.out.println("tast inn q, trykk enter, saa trykker du enter igjen for aa gaa til hovedmenyen");
+                    System.out.println("tast inn q, trykk enter, saa trykker du enter igjen for aa gaa til hovedmenyen"); //instrukser til brukeren
                 }
-                else if(hvaslagsleg == 2){
+                else if(hvaslagsleg == 2){ //samme som over
                     int styrke = 0;
                     System.out.println("du valgte aa lage en vanedannede legemiddel \n skriv styrken");
                     styrke = brukerInput.nextInt();
@@ -516,19 +532,18 @@ public class LegeSystem{
                     System.out.println("Du har naa laget et nytt legemiddel");
                     System.out.println("tast inn q, trykk enter, saa trykker du enter igjen for aa gaa til hovedmenyen");
                 }
-                else if(hvaslagsleg == 3){
+                else if(hvaslagsleg == 3){ //samme som over men uten styrke
                     System.out.println("du valgte aa lage en vanlig legemiddel");
                     nyleg = new Vanlig(navn, pris, virkestoff);
                     legemidler.leggTil(nyleg);
                     System.out.println("Du har naa laget et nytt legemiddel");
                     System.out.println("tast inn q, trykk enter, saa trykker du enter igjen for aa gaa til hovedmenyen");
                 }
-                else if(hvaslagsleg != 1 || hvaslagsleg != 2 || hvaslagsleg != 3){
+                else if(hvaslagsleg != 1 || hvaslagsleg != 2 || hvaslagsleg != 3){ //"error" kode
                     System.out.println("det du skrev ble ikke gjenkjent");
                 }
-
             }
-            else if(!bruker.equals("q")){
+            else if(!bruker.equals("q")){ //"error" kode
                 System.out.println("det du skrev ble ikke gjenkjent");
             }
         }
