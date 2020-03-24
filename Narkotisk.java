@@ -8,4 +8,8 @@ public class Narkotisk extends Legemiddel{
     public int hentNarkotiskStyrke(){
         return styrke;
     }
+
+    public String henttype(){
+        return "narkotisk";
+    }
 }

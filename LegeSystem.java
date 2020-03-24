@@ -358,16 +358,48 @@ public class LegeSystem{
                                 String svar3 = " ";
                                 svar3 = brukerInput.nextLine();
                                 if(svar3.equals("1")){
-                                    System.out.println("Du valgte aa lage hvit resept");
+                                    System.out.println("Du valgte aa lage Hvit resept");
+                                    System.out.println("velg hvilken legemiddel du vil lage resept med");
+                                    legemidler.skrivUt();
+                                    String svar4 = " ";
+                                    System.out.println("skriv inn id'en til legemiddelet du vil bruke");
+                                    svar4 = brukerInput.nextLine();
+                                    int svarlegeid = Integer.parseInt(svar4);
+                                    for(Legemiddel k : legemidler){
+                                        if(k.hentId() == svarlegeid){
+                                            System.out.println("fant legemiddel");
+                                            nymid = k;
+                                            String svar5 = " ";
+                                            System.out.println("skriv hvor mange reiter du vil ha");
+                                            svar5 = brukerInput.nextLine();
+                                            int reiter = Integer.parseInt(svar5);
+                                            try{
+                                                nyrep = nyleg.skrivHvitResept(nymid, nypas, reiter);
+                                                resepter.leggTil(nyrep);
+                                            }
+                                            catch(UlovligUtskrift e){
+                                                System.out.println("det du skrev funekt ikke");
+                                            }
+                                        }
+                                    }
                                 }
                                 else if(svar3.equals("2")){
-                                    System.out.println("skriv senere");
+                                    System.out.println("Du valgte aa lage Blaa resept");
+                                    System.out.println("velg hvilken legemiddel du vil lage resept med");
+                                    legemidler.skrivUt();
+                                    
                                 }
                                 else if(svar3.equals("3")){
-                                    System.out.println("skriv senere");
+                                    System.out.println("Du valgte aa lage Militaer resept");
+                                    System.out.println("velg hvilken legemiddel du vil lage resept med");
+                                    legemidler.skrivUt();
+                                    
                                 }
                                 else if(svar3.equals("4")){
-                                    System.out.println("skriv senere");
+                                    System.out.println("Du valgte aa lage P resept");
+                                    System.out.println("velg hvilken legemiddel du vil lage resept med");
+                                    legemidler.skrivUt();
+                                    
                                 }
                             }
                         }
