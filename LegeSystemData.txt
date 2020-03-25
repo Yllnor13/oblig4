@@ -88,7 +88,6 @@ Dag N Ness,14616379265
 øivind Paul Bakklund,13423175660
 Jo Morten Eide,16830434883
 Magne Møhre,17390851064
-jonas,sjasjdhajkfh
 # Legemidler (navn,type,pris,virkestoff,[styrke])
 natriumfluorid,vanlig,709.6757716058461,428.05126343015183
 natriummonofluorofosfat,vanlig,1061.1344012593356,559.9445911710575
