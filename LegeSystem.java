@@ -199,8 +199,7 @@ public class LegeSystem{
             }
             else if(bruker.equals("4")){
                 System.out.println("du tastet 4");
-		statistikk();
-
+                statistikk();
                 System.out.println("trykk enter for aa gaa tilbake til Hovedmeny");
                 bruker=brukerInput.nextLine();
             }
@@ -525,7 +524,7 @@ public class LegeSystem{
       else{
         System.out.println("\nHvilken resept vil du bruke?");
         for(Resept j: reseptliste){ //looper i pasienten sin reseptlista og skrive ut oversikt
-          System.out.println(j.hentId() + ": " + j.hentLegemiddel() + " (" + j.hentReit() + " reit)");
+          System.out.println(j.hentId() + ": " + j.hentLegemiddel().hentNavn() + " (" + j.hentReit() + " reit)");
         }
 
         svar = true; //sett svar til true igjen
@@ -534,12 +533,12 @@ public class LegeSystem{
           for(Resept j: reseptliste){
             String id = String.valueOf(j.hentId());
             if(bruker.equals(id) && j.bruk()){ //sjekker om input matcher med nummeret og om reit er gyldig
-              System.out.println("Brukte resept paa " + j.hentLegemiddel() + ". Antall gjenvaerende reit: " + j.hentReit());
+              System.out.println("Brukte resept paa " + j.hentLegemiddel().hentNavn() + ". Antall gjenvaerende reit: " + j.hentReit());
               svar = false;
               break;
             }
             if(bruker.equals(id) && !j.bruk()){//sjekker om input matcher med nummeret og om reit er brukt opp allerede
-              System.out.println("Kunne ikke bruke resept paa " + j.hentLegemiddel() + " (ingen gjenvaerende reit).");
+              System.out.println("Kunne ikke bruke resept paa " + j.hentLegemiddel().hentNavn() + " (ingen gjenvaerende reit).");
               svar = false;
               break;
             }
@@ -553,21 +552,23 @@ public class LegeSystem{
 
 
 
-      //oppgave E6: Opprett funksjonalitet for å vise statistikk om elementene i systemet
+    //oppgave E6: Opprett funksjonalitet for å vise statistikk om elementene i systemet
     public static void statistikk(){
 
-      int antallReseptVane = 0;    //Totalt antall utskrevne resepter på vanedannende legemidler
+      //Totalt antall utskrevne resepter på vanedannende legemidler
+      int antallReseptVane = 0; //Antall vanedannende resepter
       for (Resept r: resepter){ //Skriv for løkke som går gjennom alle reseptene
-        if (r.hentLegemiddel() ​instanceof Vanedannende){ //Man kan sjekke om et legemiddel er Vanedannende ved å bruke ​instanceof ​operatoren.
+        if (r.hentLegemiddel() instanceof Vanedannende){ //Man kan sjekke om et legemiddel er Vanedannende ved å bruke ​instanceof ​operatoren.
           antallReseptVane++;  //Hvis legemiddelet er Vanedannende, så øker antallet resepter
         }
       }
       System.out.println("Totalt antall utskrevne resepter på vanedannende legemidler: " + antallReseptVane); //printer ut verdier
 
 
-      int antallReseptNarkot = 0;  //Totalt antall utskrevne resepter på narkotiske legemidler
+      //Totalt antall utskrevne resepter på narkotiske legemidler
+      int antallReseptNarkot = 0; //Antall narkotiske resepter
       for (Resept r: resepter){ //Skriv for løkke som går gjennom alle reseptene
-        if (r.hentLegemiddel() ​instanceof Narkotisk){  //Man kan sjekke om et legemiddel er Narkotisk ved å bruke ​instanceof ​operatoren.
+        if (r.hentLegemiddel() instanceof Narkotisk){  //Man kan sjekke om et legemiddel er Narkotisk ved å bruke ​instanceof ​operatoren.
           antallReseptNarkot++; //Hvis legemiddelet er Narkotisk, så øker antallet resepter
         }
       }
@@ -575,31 +576,8 @@ public class LegeSystem{
 
 
 
-      //List opp navnene på alle leger som har skrevet ut minst en resept på narkotiske legemidler
-      int antallResp = 0; //Antall resepter på narkotiske legemiddel
-      for (Lege lege: leger){  //gå gjennom alle leger
-        for (Resept resept: lege.hentResepter()){ //Skal hente ReseptListe til pasienten
-          if (resept.hentLegemiddel() ​instanceof Narkotisk){ //Man sjekker om et legemiddel er Narkotisk ved å bruke instanceof operatoren.
-            antallResp++;  //Hvis legemiddelet er Narkotisk, så øker antall resept
-
-            System.out.println("Legens navn: " + lege.hentNavn() + "\nAntall resepter på narkotiske legemidler: " + antallResp); //printer ut verdier
-          }
-        }
-      }
-
-
-      //List opp navnene på alle pasienter som har minst en gyldig resept på narkotiske legemidler
-      int antallR = 0; //Antall resepter på narkotiske legemiddel
-      for (Pasient pasient : pasienter){ //gå gjennom alle pasienter
-        for (Resept resept: pasient.hentReseptListe()){ //Skal hente ReseptListe til legen
-          if (resept.hentLegemiddel() ​instanceof Narkotisk){ //Man sjekker om et legemiddel er Narkotisk ved å bruke ​instanceof ​operatoren.
-            antallR++;  //Hvis legemiddelet er narkotisk, så øker antall resept
-
-            System.out.println("Pasient navn: " + pasient.hentNavn() + "\nAntall resepter på narkotiske legemidler: " + antallR); //printer ut verdier
-          }
-        }
-      }
     }
+
 
 
     public static void skrivUtFil(){ //metode for aa skrive ut dataen i en ny fil
