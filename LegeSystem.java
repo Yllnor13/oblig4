@@ -199,7 +199,7 @@ public class LegeSystem{
             }
             else if(bruker.equals("4")){
                 System.out.println("du tastet 4");
-		statistikk()
+		statistikk();
 
                 System.out.println("trykk enter for aa gaa tilbake til Hovedmeny");
                 bruker=brukerInput.nextLine();
