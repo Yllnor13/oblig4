@@ -33,7 +33,8 @@ public class LegeSystem{
                         break;
                     }
                     String[] info = lest.split(","); //ny string med info til objekter
-                    Pasient pasient = new Pasient(info[0],info[1]); //lag en ny pasient med det som er i foerste og andre plass i info lista
+                    long infolong = Long.parseLong(info[1]);
+                    Pasient pasient = new Pasient(info[0],infolong); //lag en ny pasient med det som er i foerste og andre plass i info lista
                     pasienter.leggTil(pasient); //legger pasient til lista
                 }
             }
@@ -242,9 +243,9 @@ public class LegeSystem{
     }
 
     public static void lagNy(){ //denne metoden skal la brukeren lage ny objekt om de oensker
-        System.out.println("Hva vil du gjoere? \n 1. ny lege? \n 2. ny pasient? \n 3. ny resept?\n 4. ny legemiddel?\n q. dra tilbake?");
         String bruker = " ";
         while(!bruker.equals("q")){ //hvis brukeren ikke skriver q skal menyen gaa
+            System.out.println("Hva vil du gjoere? \n 1. ny lege? \n 2. ny pasient? \n 3. ny resept?\n 4. ny legemiddel?\n q. dra tilbake?");
             Scanner brukerInput = new Scanner(System.in);
             bruker = brukerInput.nextLine();
 
@@ -282,7 +283,8 @@ public class LegeSystem{
                 svar1 = brukerInput.nextLine(); //lagrer det bruker skrev som navn
                 System.out.println("skriv inn foedselsnummeret");
                 svar2 = brukerInput.nextLine(); //lagrer det brukeren skrev om til foedselsnummeret
-                Pasient pasient = new Pasient(svar1, svar2); //lager pasient
+                long svarlong = Long.parseLong(svar2);
+                Pasient pasient = new Pasient(svar1, svarlong); //lager pasient
                 pasienter.leggTil(pasient); //legger pasient til lista
                 System.out.println("tast inn q, trykk enter, saa trykker du enter igjen for aa gaa til hovedmenyen");
             }
