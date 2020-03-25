@@ -20,67 +20,6 @@ public class LegeSystem{
         }
     }
 
-    public static void liksomLes(){ //skulle bli brukt for aa teste noe annet, la bare til det som var i filen manuelt, men bruker ikke metoden i filen naa
-        Pasient p1 = new Pasient("Jens Hans Olsen", "11111143521");
-        Pasient p2 = new Pasient("Petrolina Swiq", "24120099343");
-        Pasient p3 = new Pasient("Sven Svendsen", "10111224244");
-        Pasient p4 = new Pasient("Juni Olsen", "21049563451");
-
-        pasienter.leggTil(p1);
-        pasienter.leggTil(p2);
-        pasienter.leggTil(p3);
-        pasienter.leggTil(p4);
-
-        Narkotisk lm1 = new Narkotisk("predizol", 450.00, 75.00, 8);
-        Vanedannede lm2 = new Vanedannede("Paralgin Forte", 65.00, 400.00, 5);
-        Vanlig lm3 = new Vanlig("Placebo Pianissimo", 10.00, 0.00);
-        Vanlig lm4 = new Vanlig("Ibux", 240.00, 200.00);
-
-        legemidler.leggTil(lm1);
-        legemidler.leggTil(lm2);
-        legemidler.leggTil(lm3);
-        legemidler.leggTil(lm4);
-
-        Lege l1 = new Lege("Dr. Cox");
-        Lege l2 = new Lege("Dr. Wilson");
-        Lege l3 = new Spesialist("Dr. House", 12345);
-        Lege l4 = new Lege("Dr. Hillestad Lovold");
-
-        leger.leggTil(l1);
-        leger.leggTil(l2);
-        leger.leggTil(l3);
-        leger.leggTil(l4);
-
-        try{
-            Resept r1 =l1.skrivHvitResept(lm2, p2, 7);
-            resepter.leggTil(r1);
-        }
-        catch(UlovligUtskrift e){
-            System.out.println("skriv riktig");
-        }
-        try{
-            Resept r2 = l4.skrivBlaaResept(lm3, p3, 1000);
-            resepter.leggTil(r2);
-        }
-        catch(UlovligUtskrift e){
-            System.out.println("skriv riktig");
-        }
-        try{
-            Resept r3 = l3.skrivMilitaerResept(lm1, p1, 12);
-            resepter.leggTil(r3);
-        }
-        catch(UlovligUtskrift e){
-            System.out.println("skriv riktig");
-        }
-        try{
-            Resept r4 = l2.skrivPResept(lm4, p3);
-            resepter.leggTil(r4);
-        }
-        catch(UlovligUtskrift e){
-            System.out.println("skriv riktig");
-        }
-    }
-
     public static void les(File fil){ // her er den virkelige les filen
         Scanner leser = null;
         try{
@@ -264,8 +203,10 @@ public class LegeSystem{
                 System.out.println("trykk enter for aa draa videre");
                 bruker=brukerInput.nextLine();
             }
-            else if(bruker.equals("5")){
+            else if(bruker.equals("5")){ //om bruker taster 5, saa skriver den ut dataen paa en ny fil
                 System.out.println("du tastet 5");
+                skrivUtFil(); //hoppe over til metoden for skrive ut filer.
+                System.exit(1); //bruker denne for aa hoppe tilbake
 
                 System.out.println("trykk enter for aa draa videre");
                 bruker=brukerInput.nextLine();
@@ -547,5 +488,39 @@ public class LegeSystem{
                 System.out.println("det du skrev ble ikke gjenkjent");
             }
         }
+    }
+
+    public static void skrivUtFil(){ //metode for aa skrive ut dataen i en ny fil
+        PrintWriter nyFil = null; //bruker PrintWrite for aa kunne printe dataen
+        try {
+            nyFil = new PrintWriter("LegeSystemData.txt"); // lager en ny fil
+        } catch (Exception e) { //kjoerer denne hvis hvis det ikke gaar aa lage en fil
+            System.out.print("Kan ikke lage denne filen");
+            System.exit(1); //hoper tilbake til menyen
+        }
+
+        nyFil.println("# Pasienter (navn, fnr)"); //for aa printe pasienter
+		for (Pasient p : pasienter) { //gaar gjennom hver element i pasient
+            nyFil.println(p.hentNavn() + ", " + p.hentFodselsnummer());
+        }
+
+        nyFil.println("# Legemidler (navn, type, pris, virkestoffer, [styrke])"); //for aa printe legemidler
+		for (Legemiddel l : legemidler) { //gaar gjennom hver element i legemiddel
+            nyFil.println(l.hentNavn() + ", " + l.hentType() + ", " + l.hentPris() + ", " + l.hentVirkestoff() + ", " + l.hentStyrke());
+        }
+
+        nyFil.println("# Leger (navn, kontrollID / 0 hvis vanlig lege)"); //for aa printe leger
+		for (Lege leg : leger) { //gaar gjennom hver element i lege
+            nyFil.println(leg.hentNavn() + ", " + leg.hentKontrollID());
+        }
+
+        nyFil.println("# Resepter (legemiddelNummer, legeNavn, pasientID, type, [reit])"); //for aa printe Resepter
+		for (Resept res : resepter) { //gaar gjennom hver element i resept
+            nyFil.println(res.hentLegemiddelID() + ", " + res.hentLege() + ", " + res.hentPasientId().hentId() + ", " + res.resType() + ", " + res.hentReit());
+        }
+
+        nyFil.close(); //lukker filen
+
+        System.out.println("\nLegesystem dataen har blitt lagret i LegeSystemData.txt fil");
     }
 }
