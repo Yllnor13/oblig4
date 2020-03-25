@@ -508,7 +508,7 @@ public class LegeSystem{
         for (Legemiddel l : legemidler) { //gaar gjennom hver element i legemiddel
             if(l instanceof Vanlig){ //kjoerer naar det er Vanlig legemiddel
                 nyFil.println(l.hentNavn() + "," + l.hentType() + "," + l.hentPris() + "," + l.hentVirkestoff());
-            }else{
+            }else{ //denne legger til styrke for legemiddelene som har det
                 nyFil.println(l.hentNavn() + "," + l.hentType() + "," + l.hentPris() + "," + l.hentVirkestoff() + "," + l.hentStyrke());
             }
         }
@@ -521,8 +521,9 @@ public class LegeSystem{
         nyFil.println("# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])"); //for aa printe Resepter
         for (Resept res : resepter) { //gaar gjennom hver element i resept
             if(res instanceof PResept){//kjoerer naar det er PResept
+		    //skrev det saann at det ser ut som innlesing filen til og med skrive at det en ekstra ,
                 nyFil.println(res.hentLegemiddelID() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + ",");
-            }else{
+            }else{ //skriver reiter for de som ikke er PResepter
                 nyFil.println(res.hentLegemiddelID() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + "," + res.hentReit());
             }
         }
