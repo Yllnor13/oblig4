@@ -489,6 +489,34 @@ public class LegeSystem{
             }
         }
     }
+	
+    //oppgave E6: Opprett funksjonalitet for å vise statistikk om elementene i systemet
+    public static void statistikk(){
+
+      //Totalt antall utskrevne resepter på vanedannende legemidler
+      int antallReseptVane = 0; //Antall vanedannende resepter
+      for (Resept resept: resepter){ //Skriv for løkke som går gjennom alle reseptene
+        if (resept.hentLegemiddel() instanceof Vanedannende){ //Man kan sjekke om et legemiddel er Vanedannende ved å bruke ​instanceof ​operatoren.
+          antallReseptVane++;  //Hvis legemiddelet er Vanedannende, så øker antallet resepter
+        }
+      }
+      System.out.println("Totalt antall utskrevne resepter på vanedannende legemidler: " + antallReseptVane); //printer ut verdier
+
+
+      //Totalt antall utskrevne resepter på narkotiske legemidler
+      int antallReseptNarkot = 0; //Antall narkotiske resepter
+      for (Resept resept: resepter){ //Skriv for løkke som går gjennom alle reseptene
+        if (resept.hentLegemiddel() instanceof Narkotisk){  //Man kan sjekke om et legemiddel er Narkotisk ved å bruke ​instanceof ​operatoren.
+          antallReseptNarkot++; //Hvis legemiddelet er Narkotisk, så øker antallet resepter
+        }
+      }
+      System.out.println("Totalt antall utskrevne resepter på narkotiske legemidler: " + antallReseptNarkot); //printer ut verdier
+   
+	    
+	    
+    }
+
+	
 
     public static void skrivUtFil(){ //metode for aa skrive ut dataen i en ny fil
         PrintWriter nyFil = null; //bruker PrintWrite for aa kunne printe dataen
