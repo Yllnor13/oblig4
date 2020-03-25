@@ -1,4 +1,4 @@
-public class Legemiddel{
+abstract class Legemiddel{
     String navn;
     Double pris;
     Double virkestoff;
@@ -36,4 +36,8 @@ public class Legemiddel{
     public String toString(){
         return("ID: " + Id + ", navn: " + navn + ", pris: " + pris + ", virkestoff: " + virkestoff);
     }
+
+    abstract public String hentType();
+
+    abstract public int hentStyrke();
 }
