@@ -145,7 +145,7 @@ public class LegeSystem{
                               System.out.println(e);
                           }
                       }
-                      else if(info[3].equals("militaer")){ //gjoer det samme som med hvit resept
+                      else if(info[3].equals("militaer") || info[3].equals("militaer")){ //gjoer det samme som med hvit resept
                             int reit = Integer.parseInt(info[4]);
                             try{
                                 Resept resept = nyleg.skrivMilitaerResept(nymid, nypas, reit);
