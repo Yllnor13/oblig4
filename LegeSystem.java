@@ -6,7 +6,7 @@ public class LegeSystem{
     static Lenkeliste<Pasient> pasienter = new Lenkeliste<Pasient>();
     static Lenkeliste<Legemiddel> legemidler = new Lenkeliste<Legemiddel>();
     static Lenkeliste<Resept> resepter = new Lenkeliste<Resept>();
-    
+
 
     public static void main (String[] args){ //main kode
         File tekst = new File("innlesing.txt");
@@ -99,7 +99,7 @@ public class LegeSystem{
                     Lege nyleg = null; //lager et tomt lege
                     int middelId = Integer.parseInt(info[0]); //lagrer id til middelet som middelId
                     int pasId = Integer.parseInt(info[2]); //lagrer pasienten sin Id som pasId
-                    
+
                     for(Legemiddel i : legemidler){ //gar gjennom lista med legemidler
                         if(i.hentId() == middelId){ //ser for den som har samme id som middel id
                             nymid = i; //gjoer nymid om til legemiddelet i resepten
@@ -182,25 +182,25 @@ public class LegeSystem{
             if(bruker.equals("1")){ //om brukeren skriver 1
                 System.out.println("du tastet 1");
                 oversikt(); //vis oversikten
-                System.out.println("trykk enter for aa draa videre");
+                System.out.println("trykk enter for aa gaa tilbake til Hovedmeny");
                 bruker=brukerInput.nextLine();
             }
             else if(bruker.equals("2")){
                 System.out.println("du tastet 2");//om brukeren taster 2
                 lagNy(); //kjoer lagny koden som sender brukeren til en annen meny
-                System.out.println("trykk enter for aa draa videre");
+                System.out.println("trykk enter for aa gaa tilbake til Hovedmeny");
                 bruker=brukerInput.nextLine();
             }
             else if(bruker.equals("3")){
                 System.out.println("du tastet 3");
-
-                System.out.println("trykk enter for aa draa videre");
+                brukResept();
+                System.out.println("trykk enter for aa gaa tilbake til Hovedmeny");
                 bruker=brukerInput.nextLine();
             }
             else if(bruker.equals("4")){
                 System.out.println("du tastet 4");
 
-                System.out.println("trykk enter for aa draa videre");
+                System.out.println("trykk enter for aa gaa tilbake til Hovedmeny");
                 bruker=brukerInput.nextLine();
             }
             else if(bruker.equals("5")){ //om bruker taster 5, saa skriver den ut dataen paa en ny fil
@@ -208,16 +208,16 @@ public class LegeSystem{
                 skrivUtFil(); //hoppe over til metoden for skrive ut filer.
                 System.exit(1); //bruker denne for aa hoppe tilbake
 
-                System.out.println("trykk enter for aa draa videre");
+                System.out.println("trykk enter for aa gaa tilbake til Hovedmeny");
                 bruker=brukerInput.nextLine();
             }
             else if(!bruker.equals("q")){
                 System.out.println("det du skrev ble ikke gjenkjent");
 
-                System.out.println("trykk enter for aa draa videre");
+                System.out.println("trykk enter for aa gaa tilbake til Hovedmeny");
                 bruker=brukerInput.nextLine();
             }
-            
+
         }
     }
 
@@ -366,7 +366,7 @@ public class LegeSystem{
                                             System.out.println("det var ingen legemiddel med den iden");
                                         }
                                     }
-                                    
+
                                 }
                                 else if(svar3.equals("3")){ //gjoer det samme som hvit resept
                                     System.out.println("Du valgte aa lage Militaer resept");
@@ -489,7 +489,69 @@ public class LegeSystem{
             }
         }
     }
-	
+
+
+
+    public static void brukResept(){
+      Scanner brukerInput = new Scanner(System.in);
+      Pasient valgtPasient = null; //opprett referanse for å beholde valgte pasient senere
+
+      System.out.println("\nHvilken pasient vil du se resepter for?\n");
+      for(Pasient i : pasienter){ //looper igjennom pasientlista for å skrive ut oversikt
+        System.out.println(i.hentId() + ": " + i.hentNavn() + " (fnr " + i.hentFodselsnummer() + ")");
+      }
+
+      Boolean svar = true;
+      while(svar){ //while looper for "pasient" hvis svar er true
+        String bruker = brukerInput.nextLine();// leser brukers input
+        for(Pasient i : pasienter){ //looper i pasienterlista
+          String id = String.valueOf(i.hentId());
+          if(bruker.equals(id)){ //sjekker om input matcher med nummeret
+            System.out.println("\nValgt pasient: "+ i.hentNavn() + " (fnr " + i.hentFodselsnummer() + ")");
+            valgtPasient = i;
+            svar = false; //sett svar til false for å break while
+            break; //break if sjekk
+          }
+        }
+        if(svar) System.out.println("Du maa taste inn nummeret foran pasientnavn for aa velge!");
+      }
+
+
+      Stabel<Resept> reseptliste = valgtPasient.hentReseptListe();// hent reseptliste fra valgte pasienten
+      if(reseptliste.stoerrelse() == 0){ //hvis pasienten ikke har resepter
+          System.out.println("Pasient har ingen resepter!");
+      }
+      else{
+        System.out.println("\nHvilken resept vil du bruke?");
+        for(Resept j: reseptliste){ //looper i pasienten sin reseptlista og skrive ut oversikt
+          System.out.println(j.hentId() + ": " + j.hentLegemiddel() + " (" + j.hentReit() + " reit)");
+        }
+
+        svar = true; //sett svar til true igjen
+        while(svar){ //while looper for "resept" hvis svar er true
+          String bruker = brukerInput.nextLine();
+          for(Resept j: reseptliste){
+            String id = String.valueOf(j.hentId());
+            if(bruker.equals(id) && j.bruk()){ //sjekker om input matcher med nummeret og om reit er gyldig
+              System.out.println("Brukte resept paa " + j.hentLegemiddel() + ". Antall gjenvaerende reit: " + j.hentReit());
+              svar = false;
+              break;
+            }
+            if(bruker.equals(id) && !j.bruk()){//sjekker om input matcher med nummeret og om reit er brukt opp allerede
+              System.out.println("Kunne ikke bruke resept paa " + j.hentLegemiddel() + " (ingen gjenvaerende reit).");
+              svar = false;
+              break;
+            }
+          }
+          if(svar) System.out.println("Du maa taste inn nummeret foran legemiddelet for aa velge!");
+
+      }
+    }
+  }//metode brukResept
+
+
+
+
     //oppgave E6: Opprett funksjonalitet for å vise statistikk om elementene i systemet
     public static void statistikk(){
 
@@ -511,12 +573,12 @@ public class LegeSystem{
         }
       }
       System.out.println("Totalt antall utskrevne resepter på narkotiske legemidler: " + antallReseptNarkot); //printer ut verdier
-   
-	    
-	    
+
+
+
     }
 
-	
+
 
     public static void skrivUtFil(){ //metode for aa skrive ut dataen i en ny fil
         PrintWriter nyFil = null; //bruker PrintWrite for aa kunne printe dataen
@@ -551,7 +613,7 @@ public class LegeSystem{
             if(res instanceof PResept){//kjoerer naar det er PResept
 		    //skrev det saann at det ser ut som innlesing filen til og med skrive at det en ekstra ,
                 nyFil.println(res.hentLegemiddelID() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + ",");
-            }else{ //skriver reiter for de som ikke er PResepter. det ville ha fungert å bare bruke denne, men det vil da komme reit i tillegg. Men valgta at den skulle se mer ut som innlesing.txt
+            }else{ //skriver reiter for de som ikke er PResepter
                 nyFil.println(res.hentLegemiddelID() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + "," + res.hentReit());
             }
         }
