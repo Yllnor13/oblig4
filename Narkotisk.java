@@ -1,4 +1,4 @@
-public class Narkotisk extends Legemiddel{
+class Narkotisk extends Legemiddel{
     int styrke;
     public Narkotisk(String n, Double p, Double v, int s){
         super(n,p,v);
