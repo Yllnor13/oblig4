@@ -1,12 +1,12 @@
-class Vanedannede extends Legemiddel{
+class Vanedannende extends Legemiddel{
     int styrke;
 
-    public Vanedannede(String n, Double p, Double v, int s){
+    public Vanedannende(String n, Double p, Double v, int s){
         super(n,p,v);
         this.styrke = s;
     }
 
-    public int hentVanedannedeStyrke(){
+    public int hentVanedannendeStyrke(){
         return styrke;
     }
 

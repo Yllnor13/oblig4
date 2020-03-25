@@ -57,12 +57,12 @@ public class LegeSystem{
                         Narkotisk narkotisk = new Narkotisk(info[0], pris, virkestoff, styrke); //setter alt sammen og lager en narkotisk legemiddel
                         legemidler.leggTil(narkotisk); //setter den i lista
                     }
-                    if(info[1].equals("vanedannende")){ //hvis andre posisjon i info er teksten vanedannede, saa skal vi lage en vanedannede objekt
+                    if(info[1].equals("vanedannende")){ //hvis andre posisjon i info er teksten Vanedannende, saa skal vi lage en Vanedannende objekt
                         int styrke = Integer.parseInt(info[4]); //gjoer samme som over
                         Double pris = Double.parseDouble(info[2]);
                         Double virkestoff = Double.parseDouble(info[3]);
-                        Vanedannede vanedannede = new Vanedannede(info[0], pris, virkestoff, styrke);
-                        legemidler.leggTil(vanedannede);
+                        Vanedannende Vanedannende = new Vanedannende(info[0], pris, virkestoff, styrke);
+                        legemidler.leggTil(Vanedannende);
                     }
                     if(info[1].equals("vanlig")){ //sjekker om andre plass i lista er vanlig
                         Double pris = Double.parseDouble(info[2]);
@@ -453,7 +453,7 @@ public class LegeSystem{
                 System.out.println("skriv styrken til legemiddelet (i double)");
                 virkestoff = brukerInput.nextDouble(); //det brukeren skriver som skal bli brukt som virkestoff
                 Legemiddel nyleg = null; //tomt legemiddel
-                System.out.println("velg hva slags legemiddel du skal ha \n 1. narkotisk \n 2. vanedannede \n 3. vanlig");
+                System.out.println("velg hva slags legemiddel du skal ha \n 1. narkotisk \n 2. Vanedannende \n 3. vanlig");
                 hvaslagsleg = brukerInput.nextInt(); //systemet venter paa det brukeren skriver
                 if(hvaslagsleg == 1){ //brukeren vil lage narkotisk legemiddel
                     int styrke = 0;
@@ -466,9 +466,9 @@ public class LegeSystem{
                 }
                 else if(hvaslagsleg == 2){ //samme som over
                     int styrke = 0;
-                    System.out.println("du valgte aa lage en vanedannede legemiddel \n skriv styrken");
+                    System.out.println("du valgte aa lage en Vanedannende legemiddel \n skriv styrken");
                     styrke = brukerInput.nextInt();
-                    nyleg = new Vanedannede(navn, pris, virkestoff, styrke);
+                    nyleg = new Vanedannende(navn, pris, virkestoff, styrke);
                     legemidler.leggTil(nyleg);
                     System.out.println("Du har naa laget et nytt legemiddel");
                     System.out.println("tast inn q, trykk enter, saa trykker du enter igjen for aa gaa til hovedmenyen");
