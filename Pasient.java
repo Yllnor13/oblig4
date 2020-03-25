@@ -41,6 +41,6 @@ public class Pasient{ //Del B: Skriv klassen Pasient
 
   //Overskriv ​toString() ​metoden, slik at du lett kan skrive ut all tilgjengelig informasjon om objektene
   public String toString(){
-    return "\nPasient-navn: " + navn + "\nFoedselsnummer: " + fodselsnummer + "\nPasient-ID: " + min_id;
+    return "Pasient-navn: " + navn + ", Foedselsnummer: " + fodselsnummer + ", Pasient-ID: " + min_id;
   }
 }
