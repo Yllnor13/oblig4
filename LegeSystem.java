@@ -495,8 +495,8 @@ public class LegeSystem{
 
       //Totalt antall utskrevne resepter på vanedannende legemidler
       int antallReseptVane = 0; //Antall vanedannende resepter
-      for (Resept resept: resepter){ //Skriv for løkke som går gjennom alle reseptene
-        if (resept.hentLegemiddel() instanceof Vanedannende){ //Man kan sjekke om et legemiddel er Vanedannende ved å bruke ​instanceof ​operatoren.
+      for (Resept r: resepter){ //Skriv for løkke som går gjennom alle reseptene
+        if (r.hentLegemiddel() instanceof Vanedannende){ //Man kan sjekke om et legemiddel er Vanedannende ved å bruke ​instanceof ​operatoren.
           antallReseptVane++;  //Hvis legemiddelet er Vanedannende, så øker antallet resepter
         }
       }
@@ -505,8 +505,8 @@ public class LegeSystem{
 
       //Totalt antall utskrevne resepter på narkotiske legemidler
       int antallReseptNarkot = 0; //Antall narkotiske resepter
-      for (Resept resept: resepter){ //Skriv for løkke som går gjennom alle reseptene
-        if (resept.hentLegemiddel() instanceof Narkotisk){  //Man kan sjekke om et legemiddel er Narkotisk ved å bruke ​instanceof ​operatoren.
+      for (Resept r: resepter){ //Skriv for løkke som går gjennom alle reseptene
+        if (r.hentLegemiddel() instanceof Narkotisk){  //Man kan sjekke om et legemiddel er Narkotisk ved å bruke ​instanceof ​operatoren.
           antallReseptNarkot++; //Hvis legemiddelet er Narkotisk, så øker antallet resepter
         }
       }
