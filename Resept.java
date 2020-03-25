@@ -23,10 +23,6 @@ public abstract class Resept{
         return leg;
     }
 
-    public int hentLegemiddelID(){
-        return leg.hentId();
-    }
-
     public String hentLege(){
         return doc.hentNavn();
     }
