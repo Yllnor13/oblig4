@@ -9,7 +9,7 @@ public class LegeSystem{
     
 
     public static void main (String[] args){ //main kode
-        File tekst = new File("LegeSystemData.txt");
+        File tekst = new File("innlesing.txt");
         les(tekst);
         meny();
     }
