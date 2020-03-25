@@ -16,4 +16,9 @@ public class BlaaResept extends Resept{
     public String toString(){
         return("\ntype: Blaa Resept" + "\nlegemiddel: " + leg.hentNavn() + " \nlege: " + doc.hentNavn() + " \npris: " + prosAaBetale() + " \nreit: " + reit + " \npris: " + leg.hentPris() + " betal: " + (leg.hentPris() * betal));
     }
+
+    @Override
+    public String resType(){
+        return "blaa";
+    }
 }
