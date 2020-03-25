@@ -636,9 +636,9 @@ public class LegeSystem{
         for (Resept res : resepter) { //gaar gjennom hver element i resept
             if(res instanceof PResept){//kjoerer naar det er PResept
 		    //skrev det saann at det ser ut som innlesing filen til og med skrive at det en ekstra ,
-                nyFil.println(res.hentLegemiddelID() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + ",");
+                nyFil.println(res.hentLegemiddel().hentId() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + ",");
             }else{ //skriver reiter for de som ikke er PResepter
-                nyFil.println(res.hentLegemiddelID() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + "," + res.hentReit());
+                nyFil.println(res.hentLegemiddel().hentId()  + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + "," + res.hentReit());
             }
         }
 
