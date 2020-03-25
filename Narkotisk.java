@@ -9,7 +9,13 @@ public class Narkotisk extends Legemiddel{
         return styrke;
     }
 
-    public String henttype(){
+    @Override
+    public String hentType(){
         return "narkotisk";
+    }
+
+    @Override
+    public int hentStyrke(){
+        return styrke;
     }
 }
