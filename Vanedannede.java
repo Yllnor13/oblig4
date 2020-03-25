@@ -12,7 +12,7 @@ class Vanedannede extends Legemiddel{
 
     @Override
     public String hentType(){
-        return "Vanedannede";
+        return "vanedannende";
     }
 
     @Override
