@@ -9,7 +9,7 @@ public class LegeSystem{
     
 
     public static void main (String[] args){ //main kode
-        File tekst = new File("innlesing.txt");
+        File tekst = new File("LegeSystemData.txt");
         les(tekst);
         meny();
     }
@@ -499,24 +499,32 @@ public class LegeSystem{
             System.exit(1); //hoper tilbake til menyen
         }
 
-        nyFil.println("# Pasienter (navn,fnr)"); //for aa printe pasienter
+        nyFil.println("# Pasienter (navn, fnr)"); //for aa printe pasienter
 		for (Pasient p : pasienter) { //gaar gjennom hver element i pasient
             nyFil.println(p.hentNavn() + "," + p.hentFodselsnummer());
         }
 
-        nyFil.println("# Legemidler (navn,type,pris,virkestoffer,[styrke])"); //for aa printe legemidler
-		for (Legemiddel l : legemidler) { //gaar gjennom hver element i legemiddel
-            nyFil.println(l.hentNavn() + "," + l.hentType() + "," + l.hentPris() + "," + l.hentVirkestoff() + "," + l.hentStyrke());
+        nyFil.println("# Legemidler (navn,type,pris,virkestoff,[styrke])"); //for aa printe legemidler
+        for (Legemiddel l : legemidler) { //gaar gjennom hver element i legemiddel
+            if(l instanceof Vanlig){ //kjoerer naar det er Vanlig legemiddel
+                nyFil.println(l.hentNavn() + "," + l.hentType() + "," + l.hentPris() + "," + l.hentVirkestoff());
+            }else{
+                nyFil.println(l.hentNavn() + "," + l.hentType() + "," + l.hentPris() + "," + l.hentVirkestoff() + "," + l.hentStyrke());
+            }
         }
 
         nyFil.println("# Leger (navn,kontrollID / 0 hvis vanlig lege)"); //for aa printe leger
-		for (Lege leg : leger) { //gaar gjennom hver element i lege
+        for (Lege leg : leger) { //gaar gjennom hver element i lege
             nyFil.println(leg.hentNavn() + "," + leg.hentKontrollID());
         }
 
         nyFil.println("# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])"); //for aa printe Resepter
-		for (Resept res : resepter) { //gaar gjennom hver element i resept
-            nyFil.println(res.hentLegemiddelID() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + "," + res.hentReit());
+        for (Resept res : resepter) { //gaar gjennom hver element i resept
+            if(res instanceof PResept){//kjoerer naar det er PResept
+                nyFil.println(res.hentLegemiddelID() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + ",");
+            }else{
+                nyFil.println(res.hentLegemiddelID() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + "," + res.hentReit());
+            }
         }
 
         nyFil.close(); //lukker filen
