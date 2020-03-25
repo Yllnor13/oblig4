@@ -23,6 +23,10 @@ public abstract class Resept{
         return leg.hentNavn();
     }
 
+    public int hentLegemiddelID(){
+        return leg.hentId();
+    }
+
     public String hentLege(){
         return doc.hentNavn();
     }
@@ -46,4 +50,6 @@ public abstract class Resept{
     abstract public String hentFarge();
 
     abstract public double prosAaBetale();
+
+    abstract public String resType();
 }
