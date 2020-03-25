@@ -5,7 +5,7 @@ class Vanlig extends Legemiddel{
 
     @Override
     public String hentType(){
-        return "Vanlig";
+        return "anlig";
     }
 
     @Override
