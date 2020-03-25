@@ -551,7 +551,7 @@ public class LegeSystem{
             if(res instanceof PResept){//kjoerer naar det er PResept
 		    //skrev det saann at det ser ut som innlesing filen til og med skrive at det en ekstra ,
                 nyFil.println(res.hentLegemiddelID() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + ",");
-            }else{ //skriver reiter for de som ikke er PResepter
+            }else{ //skriver reiter for de som ikke er PResepter. det ville ha fungert å bare bruke denne, men det vil da komme reit i tillegg. Men valgta at den skulle se mer ut som innlesing.txt
                 nyFil.println(res.hentLegemiddelID() + "," + res.hentLege() + "," + res.hentPasientId().hentId() + "," + res.resType() + "," + res.hentReit());
             }
         }
