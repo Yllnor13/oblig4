@@ -9,7 +9,7 @@ public class LegeSystem{
 
 
     public static void main (String[] args){ //main kode
-        File tekst = new File("innlesing.txt");
+        File tekst = new File("bigfil.txt");
         les(tekst);
         meny();
     }
@@ -93,33 +93,35 @@ public class LegeSystem{
                     Lege nyleg = null; //lager et tomt lege
                     int middelId = Integer.parseInt(info[0]); //lagrer id til middelet som middelId
                     int pasId = Integer.parseInt(info[2]); //lagrer pasienten sin Id som pasId
-                    boolean gyldigLinje = false;
+                    boolean gyldigLinjepas = false;
+                    boolean gyldigLinjeleg = false;
+                    boolean gyldigLinjemid = false;
 
                     for(Legemiddel i : legemidler){ //gar gjennom lista med legemidler
                         if(i.hentId() == middelId){ //ser for den som har samme id som middel id
                             nymid = i;
-                            gyldigLinje = true;
+                            gyldigLinjemid = true;
                             break; //gjoer nymid om til legemiddelet i resepten
                         }
-                        gyldigLinje = false;
+                        gyldigLinjemid = false;
                     }
                     for(Lege i : leger){ //gaar gjennom lista med leger
                         if(i.hentNavn().equals(info[1])){ //ser etter en lege med samme navn som paa resepten
                             nyleg = i;
-                            gyldigLinje = true; //gjoer nyleg om til legen med samme navn som i resepten
+                            gyldigLinjeleg = true; //gjoer nyleg om til legen med samme navn som i resepten
                             break;
                         }
-                        gyldigLinje = false;
+                        gyldigLinjeleg = false;
                     }
                     for(Pasient i : pasienter){ //gaar gjennom pasient lista
                         if(i.hentId() == pasId){ //hvis pasienten i resepten ahr samme id som pasienten funnet
                             nypas = i; //gjoer nypas om til pasienten med samme id som i resepten
-                            gyldigLinje = true;
+                            gyldigLinjepas = true;
                             break;
                         }
-                        gyldigLinje = false;
+                        gyldigLinjepas = false;
                     }//her skal reseptene bli laget
-                    if(gyldigLinje) {
+                    if(gyldigLinjepas == true && gyldigLinjemid == true && gyldigLinjeleg == true) {
                       if(info[3].equals("hvit")){ //om  fjerde posisjon i info lista er teksten hvit
                           int reit = Integer.parseInt(info[4]); //gjoer reit om til det som er i femte posisjon
                           try{
@@ -142,27 +144,27 @@ public class LegeSystem{
                               System.out.println(e);
                           }
                       }
-                      else if(info[3].equals("millitaer")){ //gjoer det samme som med hvit resept
-                          int reit = Integer.parseInt(info[4]);
-                          try{
-                              Resept resept = nyleg.skrivMilitaerResept(nymid, nypas, reit);
-                              resepter.leggTil(resept);
-                              nypas.leggTilResept(resept);
-                          }
-                          catch(UlovligUtskrift e){
-                              System.out.println(e);
-                          }
+                      else if(info[3].equals("militaer")){ //gjoer det samme som med hvit resept
+                            int reit = Integer.parseInt(info[4]);
+                            try{
+                                Resept resept = nyleg.skrivMilitaerResept(nymid, nypas, reit);
+                                resepter.leggTil(resept);
+                                nypas.leggTilResept(resept);
+                            }
+                            catch(UlovligUtskrift e){
+                                System.out.println(e);
+                            }
                       }
                       else if(info[3].equals("p")){ //gjoer nesten det samme som hvit, bare uten reit
-                          try{
-                              Resept resept = nyleg.skrivPResept(nymid, nypas);
-                              resepter.leggTil(resept);
-                              nypas.leggTilResept(resept);
-                          }
-                          catch(UlovligUtskrift e){
-                              System.out.println(e);
-                          }
-                      }
+                            try{
+                                Resept resept = nyleg.skrivPResept(nymid, nypas);
+                                resepter.leggTil(resept);
+                                nypas.leggTilResept(resept);
+                            }
+                            catch(UlovligUtskrift e){
+                                System.out.println(e);
+                            }
+                        }
                     }
 
                 }
