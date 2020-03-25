@@ -14,12 +14,6 @@ public class LegeSystem{
         meny();
     }
 
-    public static void sjekkId(){ //ble brukt for aa teste noe tidligere
-        for(Legemiddel i : legemidler){
-            System.out.println(i.hentId());
-        }
-    }
-
     public static void les(File fil){ // her er den virkelige les filen
         Scanner leser = null;
         try{
@@ -99,65 +93,78 @@ public class LegeSystem{
                     Lege nyleg = null; //lager et tomt lege
                     int middelId = Integer.parseInt(info[0]); //lagrer id til middelet som middelId
                     int pasId = Integer.parseInt(info[2]); //lagrer pasienten sin Id som pasId
+                    boolean gyldigLinje = false;
 
                     for(Legemiddel i : legemidler){ //gar gjennom lista med legemidler
                         if(i.hentId() == middelId){ //ser for den som har samme id som middel id
-                            nymid = i; //gjoer nymid om til legemiddelet i resepten
+                            nymid = i;
+                            gyldigLinje = true;
+                            break; //gjoer nymid om til legemiddelet i resepten
                         }
+                        gyldigLinje = false;
                     }
                     for(Lege i : leger){ //gaar gjennom lista med leger
                         if(i.hentNavn().equals(info[1])){ //ser etter en lege med samme navn som paa resepten
-                            nyleg = i; //gjoer nyleg om til legen med samme navn som i resepten
+                            nyleg = i;
+                            gyldigLinje = true; //gjoer nyleg om til legen med samme navn som i resepten
+                            break;
                         }
+                        gyldigLinje = false;
                     }
                     for(Pasient i : pasienter){ //gaar gjennom pasient lista
                         if(i.hentId() == pasId){ //hvis pasienten i resepten ahr samme id som pasienten funnet
                             nypas = i; //gjoer nypas om til pasienten med samme id som i resepten
+                            gyldigLinje = true;
+                            break;
                         }
+                        gyldigLinje = false;
                     }//her skal reseptene bli laget
-                    if(info[3].equals("hvit")){ //om  fjerde posisjon i info lista er teksten hvit
-                        int reit = Integer.parseInt(info[4]); //gjoer reit om til det som er i femte posisjon
-                        try{
-                            Resept resept = nyleg.skrivHvitResept(nymid, nypas, reit); //lage resepten med nypas, nymid og reit
-                            resepter.leggTil(resept); //legge til resepten i resept lista
-                            nypas.leggTilResept(resept); //legge til resepten til pasientens egen reseptliste
-                        }
-                        catch(UlovligUtskrift e){ //om utskriften er ikke tillat, ta denne erroren
-                            System.out.println(e);
-                        }
+                    if(gyldigLinje) {
+                      if(info[3].equals("hvit")){ //om  fjerde posisjon i info lista er teksten hvit
+                          int reit = Integer.parseInt(info[4]); //gjoer reit om til det som er i femte posisjon
+                          try{
+                              Resept resept = nyleg.skrivHvitResept(nymid, nypas, reit); //lage resepten med nypas, nymid og reit
+                              resepter.leggTil(resept); //legge til resepten i resept lista
+                              nypas.leggTilResept(resept); //legge til resepten til pasientens egen reseptliste
+                          }
+                          catch(UlovligUtskrift e){ //om utskriften er ikke tillat, ta denne erroren
+                              System.out.println(e);
+                          }
+                      }
+                      else if(info[3].equals("blaa")){ //gjoer det samme som med hvit resept
+                          int reit = Integer.parseInt(info[4]);
+                          try{
+                              Resept resept = nyleg.skrivBlaaResept(nymid, nypas, reit);
+                              resepter.leggTil(resept);
+                              nypas.leggTilResept(resept);
+                          }
+                          catch(UlovligUtskrift e){
+                              System.out.println(e);
+                          }
+                      }
+                      else if(info[3].equals("millitaer")){ //gjoer det samme som med hvit resept
+                          int reit = Integer.parseInt(info[4]);
+                          try{
+                              Resept resept = nyleg.skrivMilitaerResept(nymid, nypas, reit);
+                              resepter.leggTil(resept);
+                              nypas.leggTilResept(resept);
+                          }
+                          catch(UlovligUtskrift e){
+                              System.out.println(e);
+                          }
+                      }
+                      else if(info[3].equals("p")){ //gjoer nesten det samme som hvit, bare uten reit
+                          try{
+                              Resept resept = nyleg.skrivPResept(nymid, nypas);
+                              resepter.leggTil(resept);
+                              nypas.leggTilResept(resept);
+                          }
+                          catch(UlovligUtskrift e){
+                              System.out.println(e);
+                          }
+                      }
                     }
-                    else if(info[3].equals("blaa")){ //gjoer det samme som med hvit resept
-                        int reit = Integer.parseInt(info[4]);
-                        try{
-                            Resept resept = nyleg.skrivBlaaResept(nymid, nypas, reit);
-                            resepter.leggTil(resept);
-                            nypas.leggTilResept(resept);
-                        }
-                        catch(UlovligUtskrift e){
-                            System.out.println(e);
-                        }
-                    }
-                    else if(info[3].equals("millitaer")){ //gjoer det samme som med hvit resept
-                        int reit = Integer.parseInt(info[4]);
-                        try{
-                            Resept resept = nyleg.skrivMilitaerResept(nymid, nypas, reit);
-                            resepter.leggTil(resept);
-                            nypas.leggTilResept(resept);
-                        }
-                        catch(UlovligUtskrift e){
-                            System.out.println(e);
-                        }
-                    }
-                    else if(info[3].equals("p")){ //gjoer nesten det samme som hvit, bare uten reit
-                        try{
-                            Resept resept = nyleg.skrivPResept(nymid, nypas);
-                            resepter.leggTil(resept);
-                            nypas.leggTilResept(resept);
-                        }
-                        catch(UlovligUtskrift e){
-                            System.out.println(e);
-                        }
-                    }
+
                 }
             }
         }
@@ -552,7 +559,7 @@ public class LegeSystem{
 
 
 
- 
+
     //oppgave E6: Opprett funksjonalitet for å vise statistikk om elementene i systemet
     public static void statistikk(){
 
@@ -583,7 +590,7 @@ public class LegeSystem{
         for (Resept r: lege.hentResepter()){ //Skal hente ReseptListe til pasienten
           if (r.hentLegemiddel().hentType() == "narkotisk"){ //Sjekker om et legemiddel er Narkotisk
             antallResp++;  //Hvis legemiddelet er Narkotisk, så øker antall resept
-		  
+
             System.out.println("Legens navn: " + lege.hentNavn() + "\nAntall resepter på narkotiske legemidler: " + antallResp); //printer ut verdier
           }
         }
@@ -596,7 +603,7 @@ public class LegeSystem{
         for (Resept r: pasient.hentReseptListe()){ //Skal hente ReseptListe til legen
           if (r.hentLegemiddel().hentType() == "narkotisk"){ //Sjekker om et legemiddel er Narkotisk
             antallR++;  //Hvis legemiddelet er narkotisk, så øker antall resept
-		  
+
             System.out.println("Pasient navn: " + pasient.hentNavn() + "\nAntall resepter på narkotiske legemidler: " + antallR); //printer ut verdier
           }
         }
