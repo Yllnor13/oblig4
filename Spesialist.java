@@ -7,6 +7,7 @@ public class Spesialist extends Lege implements Godkjenningsfritak{
         kontrollID = i;
     }
 
+    @Override
     public int hentKontrollID(){
         return kontrollID;
     }
