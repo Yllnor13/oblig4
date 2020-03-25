@@ -552,6 +552,7 @@ public class LegeSystem{
 
 
 
+ 
     //oppgave E6: Opprett funksjonalitet for å vise statistikk om elementene i systemet
     public static void statistikk(){
 
@@ -579,10 +580,10 @@ public class LegeSystem{
       //List opp navnene på alle leger som har skrevet ut minst en resept på narkotiske legemidler
       int antallResp = 0; //Antall resepter på narkotiske legemiddel
       for (Lege lege: leger){  //gå gjennom alle leger
-        for (Resept resept: lege.hentResepter()){ //Skal hente ReseptListe til pasienten
-          if (resept.hentLegemiddel() ​instanceof Narkotisk){ //Man sjekker om et legemiddel er Narkotisk ved å bruke instanceof operatoren.
+        for (Resept r: lege.hentResepter()){ //Skal hente ReseptListe til pasienten
+          if (r.hentLegemiddel().hentType() == "narkotisk"){ //Sjekker om et legemiddel er Narkotisk
             antallResp++;  //Hvis legemiddelet er Narkotisk, så øker antall resept
-
+		  
             System.out.println("Legens navn: " + lege.hentNavn() + "\nAntall resepter på narkotiske legemidler: " + antallResp); //printer ut verdier
           }
         }
@@ -592,15 +593,16 @@ public class LegeSystem{
       //List opp navnene på alle pasienter som har minst en gyldig resept på narkotiske legemidler
       int antallR = 0; //Antall resepter på narkotiske legemiddel
       for (Pasient pasient : pasienter){ //gå gjennom alle pasienter
-        for (Resept resept: pasient.hentReseptListe()){ //Skal hente ReseptListe til legen
-          if (resept.hentLegemiddel() ​instanceof Narkotisk){ //Man sjekker om et legemiddel er Narkotisk ved å bruke ​instanceof ​operatoren.
+        for (Resept r: pasient.hentReseptListe()){ //Skal hente ReseptListe til legen
+          if (r.hentLegemiddel().hentType() == "narkotisk"){ //Sjekker om et legemiddel er Narkotisk
             antallR++;  //Hvis legemiddelet er narkotisk, så øker antall resept
-
+		  
             System.out.println("Pasient navn: " + pasient.hentNavn() + "\nAntall resepter på narkotiske legemidler: " + antallR); //printer ut verdier
           }
         }
       }
     }
+
 
 
 
