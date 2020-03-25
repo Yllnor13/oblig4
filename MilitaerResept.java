@@ -11,4 +11,9 @@ public class MilitaerResept extends HvitResept{
     public String toString(){
         return("\ntype: Militaer Resept" + "\nlegemiddel: " + leg.hentNavn() + "\nlege: " + doc.hentNavn() + "\npasientID: " + pasientID + "\nreit: " + reit + "\npris: " + prisAaBetale() + "\nbetal: " + (leg.hentPris() * 0));
     }
+    
+    @Override
+    public String resType(){
+        return "millitaer";
+    }
 }
