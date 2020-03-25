@@ -14,6 +14,10 @@ public class Lege implements Comparable<Lege> {
       return("navn: " + navn);
   }
 
+  public int hentKontrollID(){
+    return 0;
+  }
+
   public int compareTo(Lege legen){
     return navn.compareTo(legen.hentNavn());
   }//metode for å sammenligne objekter direkte
