@@ -592,7 +592,7 @@ public class LegeSystem{
       int antallResp = 0; //Antall resepter paa narkotiske legemiddel
       for (Lege lege: leger){  //gaa gjennom alle leger
         for (Resept r: lege.hentResepter()){ //Skal hente ReseptListe til legen
-          if (r.hentLegemiddel().hentType() == "narkotisk"){ //Sjekker om et legemiddel er Narkotisk
+          if (r.hentLegemiddel().hentType().equals("narkotisk")){ //Sjekker om et legemiddel er Narkotisk
             antallResp++;  //Hvis legemiddelet er Narkotisk, saa oeker antall resept
           }
         }
@@ -607,7 +607,7 @@ public class LegeSystem{
       int antallR = 0; //Antall resepter paa narkotiske legemiddel
       for (Pasient pasient : pasienter){ //gaa gjennom alle pasienter
         for (Resept r: pasient.hentReseptListe()){ //Skal hente ReseptListe til pasienten
-          if (r.hentLegemiddel().hentType() == "narkotisk"){ //Sjekker om et legemiddel er Narkotisk
+          if (r.hentLegemiddel().hentType().equals("narkotisk")){ //Sjekker om et legemiddel er Narkotisk
             antallR++;  //Hvis legemiddelet er narkotisk, saa oeker antall resept
           }
         }
