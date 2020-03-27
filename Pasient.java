@@ -2,12 +2,12 @@ public class Pasient{ //Del B: Skriv klassen Pasient
 
    //Deklarerer instansvariabler
   private String navn; //Pasienten har et navn og et fødselsnummer-tekststreng
-  private long fodselsnummer; //gjorde dette om til long istedenfor string for aa se om brukeren skriver tekst eller tall i legesystem naar de skal lage ny pasient
+  private String fodselsnummer; //String som skal lagre foedselsnummeret
   private static int ID = 0; //Hver pasient har en unik ID. Ingen pasienter har samme ID.
   private int min_id;
   private Stabel<Resept> reseptListe; //Vi bruker en ​Stabel<Resept>​ til å lagre pasientens resepter
 
-  public Pasient(String nav, long fodselnr){ //Lag konstruktøren til​ Pasient
+  public Pasient(String nav, String fodselnr){ //Lag konstruktøren til​ Pasient
     navn = nav;
     fodselsnummer = fodselnr;
     min_id = ID;  //Når en ny pasient registreres, skal denne i tillegg få en unik ID
@@ -35,7 +35,7 @@ public class Pasient{ //Del B: Skriv klassen Pasient
     return navn;
   }
 
-  public long hentFodselsnummer(){
+  public String hentFodselsnummer(){
     return fodselsnummer;
   }
 

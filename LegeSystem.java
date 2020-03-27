@@ -34,7 +34,7 @@ public class LegeSystem{
                     }
                     String[] info = lest.split(","); //ny string med info til objekter
                     long infolong = Long.parseLong(info[1]);
-                    Pasient pasient = new Pasient(info[0],infolong); //lag en ny pasient med det som er i foerste og andre plass i info lista
+                    Pasient pasient = new Pasient(info[0],info[1]); //lag en ny pasient med det som er i foerste og andre plass i info lista
                     pasienter.leggTil(pasient); //legger pasient til lista
                 }
             }
@@ -286,16 +286,16 @@ public class LegeSystem{
                 try{ //sjekker om brukeren skriver tall eller ikke
                     long svarlong = Long.parseLong(svar2);
                     if(String.valueOf(svarlong).length() == 11){
-                        Pasient pasient = new Pasient(svar1, svarlong); //lager pasient
+                        Pasient pasient = new Pasient(svar1, svar2); //lager pasient
                         pasienter.leggTil(pasient); //legger pasient til lista
                         System.out.println("Du lagde pasient");
                     }
                     else{
-                        System.out.println("du maa skrive inn 11 siffer, pasient ble ikke laget");
+                        System.out.println("du maa skrive inn 11 siffer, pasient ble ikke laget"); //faar error dersom de skriver tall
                     }
                 }
                 catch(NumberFormatException e){
-                    System.out.println("skriv tall retard");
+                    System.out.println("skriv tall og ikke bokstaver");
                 }
             }
             else if(bruker.equals("3")){ //bruker vil lage resept om de taster 3
