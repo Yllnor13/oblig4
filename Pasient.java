@@ -2,7 +2,7 @@ public class Pasient{ //Del B: Skriv klassen Pasient
 
    //Deklarerer instansvariabler
   private String navn; //Pasienten har et navn og et fødselsnummer-tekststreng
-  private long fodselsnummer;
+  private long fodselsnummer; //gjorde dette om til long istedenfor string for aa se om brukeren skriver tekst eller tall i legesystem naar de skal lage ny pasient
   private static int ID = 0; //Hver pasient har en unik ID. Ingen pasienter har samme ID.
   private int min_id;
   private Stabel<Resept> reseptListe; //Vi bruker en ​Stabel<Resept>​ til å lagre pasientens resepter
