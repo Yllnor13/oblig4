@@ -1,2 +1,2 @@
-# oblig4
-oblig 4 innlevering.
+# Obligatorsik oppgave 4
+Lag et sammensatt system for leger som gir diverse legemidler med resepter til pasienter. 
